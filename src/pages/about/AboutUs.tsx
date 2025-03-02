@@ -29,6 +29,7 @@ const slides = [
 
 const AboutUs = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedLogo, setSelectedLogo] = useState();
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -39,7 +40,7 @@ const AboutUs = () => {
   };
   const navigate = useNavigate();
   return (
-    <div className={cn("relative  overflow-hidden h-screen", currentSlide !== 5 && "bg-[#003B5C]")}>
+    <div className={cn("relative  overflow-hidden h-screen", currentSlide !== 5 && "bg-main2")}>
       <div className=" mix-blend-multiply absolute left-0 top-0 z-30 w-96">
         <AnimatedSvgQ />
       </div>
@@ -53,7 +54,7 @@ const AboutUs = () => {
               transition={{ duration: 0.5 }}
               className="absolute inset-0"
             >
-              {React.createElement(slide.component)}
+              {React.createElement(slide.component, { setCurrentSlide, setSelectedLogo, selectedLogo })}
             </motion.div>
           )}
         </AnimatePresence>
@@ -75,15 +76,14 @@ const AboutUs = () => {
           <ButtonCustom
             variant="outline"
             size="lg"
-            onClick={nextSlide}
-            disabled={currentSlide === slides.length - 1}
+            onClick={() => (currentSlide === slides.length - 1 ? navigate("/") : nextSlide())}
             className="backdrop-blur-sm hover:text-white bg-main text-main2 font-semibold special-font"
           >
             Next <ChevronRight className="h-4 w-4" />
           </ButtonCustom>
         </div>{" "}
         <Button
-          onClick={() => (currentSlide === 0 ? navigate("/") : setCurrentSlide(0))}
+          onClick={() => navigate("/")}
           variant="default"
           size="lg"
           className="fixed !px-4  !py-6 cursor-pointer hover:bg-white hover:text-gray-800 bottom-8 right-36 duration-200 rounded-full text-white bg-main2 z-50 backdrop-blur-sm"

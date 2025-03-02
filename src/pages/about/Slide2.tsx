@@ -27,7 +27,7 @@ const Slide2 = () => {
     setTitle("Mission , Vision & Values");
   }, []);
   return (
-    <div className="relative min-h-screen bg-[#003B5C] overflow-hidden">
+    <div className="relative min-h-screen bg-main2 overflow-hidden">
       {/* Background Wave Pattern */}
       <div className="absolute inset-0 opacity-30">
         <img src="/Rectangle 3 (1).png" alt="Background Pattern" className="object-cover bg-fixed" />

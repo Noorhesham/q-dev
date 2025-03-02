@@ -32,11 +32,11 @@ const Slide3 = () => {
           </div>
 
           <div className=" relative">
-            <div className="relative w-[400px] h-[500px] rounded-lg  overflow-hidden">
+            <div className="relative w-[350px] h-[410px] rounded-lg  overflow-hidden">
               <img
                 src="/Rectangle 5 (2).png"
                 alt="CEO"
-                className="object-cover right-0 absolute top-1/2 -translate-y-1/2  z-20 w-[80%] h-[80%]"
+                className="object-cover  right-0 absolute top-1/2 -translate-y-1/2  z-20 w-[76%] h-[80%]"
               />{" "}
             </div>
             <img
@@ -45,10 +45,9 @@ const Slide3 = () => {
               className="object-cover z-10 absolute inset-0 w-full h-full"
             />
             <div className=" -mt-8 pb-4  relative  ">
-              <h2 className=" text-2xl font-semibold   relative text-center  special-font text-main2 z-30">
+              <h2 className=" text-lg font-semibold   relative text-center  special-font text-main2 z-30">
                 Eng Ahmed Gaber
               </h2>
-              <p className="text-black relative z-30  text-center">is the CEO of Q developments.</p>
             </div>
           </div>
         </div>

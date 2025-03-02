@@ -7,22 +7,24 @@ const Header = ({
   desc,
   col,
   className,
+  paraClassName,
 }: {
   title: string;
   view?: boolean;
   desc: string;
   col?: boolean;
   className?: string;
+  paraClassName?: string;
 }) => {
   const { placeId } = useParams();
 
   return (
     <div>
-      <div className={`${col && "flex-col"} ${className && className} flex text-white items-start gap-4 `}>
+      <div className={`${col && "flex-col"} ${className && className} flex text-white items-start gap-14 `}>
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={` ${className} !w-fit text-6xl special-font font-special`}
+          className={` ${className} !w-fit text-nowrap text-6xl special-font font-special`}
         >
           North Coast
         </motion.h1>
@@ -30,7 +32,7 @@ const Header = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="max-w-2xl space-y-4 text-cream/80"
+          className={` ${paraClassName} max-w-full space-y-4 text-cream/80`}
         >
           <p>
             Q Developments was established in 2022 to engrave its signature in the Egyptian market for a lifetime by

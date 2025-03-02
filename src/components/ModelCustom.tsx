@@ -33,10 +33,9 @@ const ModelCustom = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{btn}</DialogTrigger>
-      <DialogContent className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[525px] max-h-[80vh] ">
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{text}</DialogDescription>
+          <DialogTitle>{""}</DialogTitle>
         </DialogHeader>
         {content}
       </DialogContent>

@@ -36,7 +36,7 @@ const videos = [
 
 export default function Videos() {
   return (
-    <div className="relative min-h-screen bg-[#003B5C]">
+    <div className="relative min-h-screen bg-main2">
       <MaxWidthWrapper className="relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-16">
           <div className=" self-center mx-auto my-5 w-fit flex flex-col !items-center text-center">
@@ -82,7 +82,8 @@ export default function Videos() {
                         </DialogTrigger>
                         <DialogContent className="!max-w-full !h-[90vh] bg-transparent w-full  ">
                           <div className=" w-full  ">
-                            <video controls
+                            <video
+                              controls
                               src="/JoJo with Dragon Ball Sound Effects Test.mp4"
                               className="w-full h-full inset-0   absolute object-cover"
                             ></video>

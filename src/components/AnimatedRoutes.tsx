@@ -14,6 +14,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 import ProjectTabs from "@/pages/project/Tabs";
 import Start from "./Start";
+import Video from "@/pages/Video";
 
 export const AnimatedRoutes = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ export const AnimatedRoutes = () => {
           <Route path="location" element={<Location />} />
           <Route path="facilities" element={<Facilities />} />
           <Route path="masterplan" element={<MasterPlan />} />
+          <Route path="video" element={<Video />} />
           <Route path="videos" element={<Videos />} />
           <Route path="images" element={<Images />} />
         </Route>

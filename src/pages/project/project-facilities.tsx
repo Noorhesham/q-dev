@@ -27,14 +27,6 @@ export default function Facilities() {
         className="absolute h-full left-0 top-0 z-20 w-full mix-blend-multiply"
       >
         <SvgQ2 />
-      </motion.div>
-      <motion.div
-        initial={{ x: -50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute h-full left-0 top-0 z-20 w-full mix-blend-multiply"
-      >
-        <SvgQ2 />
       </motion.div>{" "}
       <motion.div
         className="absolute inset-0"

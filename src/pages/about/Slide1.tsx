@@ -4,7 +4,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { useNav } from "@/context/NavContext";
 
-const Counter = ({ value }) => {
+const Counter = ({ value, prefix }: { value: number; prefix?: string }) => {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.floor(latest));
 
@@ -13,7 +13,16 @@ const Counter = ({ value }) => {
     return controls.stop;
   }, [value, count]);
 
-  return <motion.span>{rounded}</motion.span>;
+  return (
+    <div className="flex gap-2 items-center s">
+      <motion.span>{rounded}</motion.span>
+      <span className="!text-xs flex flex-col special-font">
+        {prefix?.split("<br/>").map((word, i) => (
+          <span key={i}>{word}</span>
+        ))}
+      </span>
+    </div>
+  );
 };
 
 const Slide1 = () => {
@@ -22,7 +31,7 @@ const Slide1 = () => {
     setTitle("About Us");
   }, []);
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative poppins min-h-screen overflow-hidden">
       <motion.div
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -37,7 +46,7 @@ const Slide1 = () => {
         <div className="max-w-3xl py-32">
           <h1 className="special-font text-6xl text-cream mb-8">Reach to the Beyond</h1>
 
-          <div className="space-y-4 text-cream/80">
+          <div className="space-y-4 text-sm font-normal text-cream/80">
             <p>
               Q Developments was established in 2023 to engrave its signature in the Egyptian market for a lifetime by
               introducing quality homes to the Egyptian society in perfectly planned projects that provide integrated
@@ -56,23 +65,23 @@ const Slide1 = () => {
           <div className="grid grid-cols-3 gap-8 mt-16">
             <div className="text-cream">
               <div className="special-font text-5xl mb-2">
-                <Counter value={22} />
+                <Counter prefix="Billion<br/>Pounds" value={22} />
               </div>
-              <div className="text-sm opacity-80 uppercase leading-tight">OF CURRENT INVESTMENT</div>
+              <div className="text-sm opacity-80 uppercase leading-tight text-white">OF CURRENT INVESTMENT</div>
             </div>
             <div className="text-cream">
               <div className="special-font text-5xl mb-2">
-                <Counter value={260} />
+                <Counter prefix="Areas<br/> 1m sgm" value={260} />
               </div>
-              <div className="text-sm opacity-80 uppercase leading-tight">
+              <div className="text-sm opacity-80 uppercase leading-tight text-white">
                 LAND BANK IN THE NORTH COAST AND NEW ZAYED
               </div>
             </div>
             <div className="text-cream">
               <div className="special-font text-5xl mb-2">
-                <Counter value={12} />
+                <Counter prefix="Billion<br/>Pounds" value={12} />
               </div>
-              <div className="text-sm opacity-80 uppercase leading-tight">
+              <div className="text-sm opacity-80 uppercase leading-tight text-white">
                 OF PLANNED INVESTMENTS IN THE NEAR FUTURE
               </div>
             </div>

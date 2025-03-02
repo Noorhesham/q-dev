@@ -32,10 +32,10 @@ export default function About() {
     <div className="relative min-h-screen overflow-hidden">
       {/* Background SVG animation */}
       <motion.div
-        initial={{ x: -100, opacity: 0 }}
+        initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="absolute left-0 top-0 z-20 w-full mix-blend-multiply"
+        transition={{ duration: 1 }}
+        className="absolute h-full left-0 top-0 z-20 w-full mix-blend-multiply"
       >
         <SvgQ2 />
       </motion.div>

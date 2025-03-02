@@ -43,7 +43,8 @@ const Slide4 = () => {
     setTitle("Board Members");
   }, []);
   return (
-    <div className="relative min-h-screen bg-[#003B5C] overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background image */}
       <MaxWidthWrapper className="text-white z-30 relative">
         <div className="pt-24 pb-16">
           <div className="grid grid-cols-3 gap-8 mt-16">
@@ -57,42 +58,53 @@ const Slide4 = () => {
                 onMouseEnter={() => setHoveredMember(index)}
                 onMouseLeave={() => setHoveredMember(null)}
               >
-                <div className="relative aspect-square rounded-[32px] overflow-hidden bg-white/5 backdrop-blur-sm">
+                <div className="relative aspect-square rounded-[32px] overflow-hidden">
                   <motion.img
-                    src={member.image || "/placeholder.svg"}
+                    src={member.image}
                     alt={member.name}
                     className="absolute inset-0 w-full h-full object-cover"
-                    animate={hoveredMember === index ? { opacity: 0.1 } : { opacity: 1 }}
-                    transition={{ duration: 0.3 }}
                   />
 
-                  {/* Info Overlay - Always visible */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                    <h3 className="text-lg font-semibold">{member.name}</h3>
-                    <p className="text-sm text-cream/80">{member.role}</p>
-                  </div>
-
-                  {/* Details Overlay - Visible on hover */}
+                  {/* Non-hover overlay with fade out */}
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={hoveredMember === index ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    className="absolute bottom-5 left-0 right-0 w-[80%]"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: hoveredMember === index ? 0 : 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-[#003B5C]/95 p-6 rounded-[32px]"
                   >
-                    <div className="flex items-center gap-2 mb-6">
-                      <img src="/Vector (8).png" alt="Q" className="w-8 h-8" />
-                      <div>
+                    <div className="flex items-start">
+                      <img src="/Vector (18).png" alt="Q" className="w-[44px] mix-blend-multiply h-auto" />
+                      <div className="mix-blend-multiply rounded-full px-4 py-[1px] rounded-l-none bg-main2 flex-col">
                         <h3 className="text-lg font-semibold">{member.name}</h3>
-                        <p className="text-sm text-cream/80">{member.role}</p>
+                        <p className="text-sm text-nowrap text-cream/80">{member.role}</p>
                       </div>
                     </div>
-                    <div className="text-sm text-cream/90 space-y-4">
-                      {member.details.split("\n").map((detail, i) => (
-                        <p key={i} className="leading-relaxed pl-4 relative">
-                          <span className="absolute left-0">•</span>
-                          {detail.trim()}
-                        </p>
-                      ))}
+                  </motion.div>
+
+                  {/* Hover overlay with fade in */}
+                  <motion.div
+                    className="absolute w-fit bg-transparent left-0 h-fit top-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{
+                      opacity: hoveredMember === index ? 1 : 0,
+                      y: hoveredMember === index ? 0 : 20,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex items-start">
+                      <img src="/Vector (18).png" alt="Q" className="w-[44px]  h-auto" />
+                      <div className=" rounded-3xl px-4 py-[1px] rounded-l-none bg-main2 flex-col">
+                        <h3 className="text-lg font-semibold">{member.name}</h3>
+                        <p className="text-sm text-nowrap text-cream/80">{member.role}</p>{" "}
+                        <div className="text-sm text-cream/90 space-y-4">
+                          {member.details.split("\n").map((detail, i) => (
+                            <p key={i} className="leading-relaxed pl-4 relative">
+                              <span className="absolute left-0">•</span>
+                              {detail.trim()}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 </div>

@@ -4,6 +4,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { ButtonCustom } from "@/components/ButtonCustom";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useEffect } from "react";
 //page name
 const projectTabs = ["about", "location", "facilities", "masterplan", "videos", "images"];
 
@@ -26,7 +27,6 @@ export function NavigationControls() {
   };
 
   const position = getCurrentPosition();
-  console.log(position);
   // Navigation logic
   const goNext = () => {
     if (position === "places") {
@@ -42,12 +42,14 @@ export function NavigationControls() {
       }
     }
   };
-
+  const params = useParams();
+  const video = true;
+  console.log(position);
   const goPrev = () => {
     if (position === "projects") {
       navigate(`/${placeId}`);
     } else if (position === "about") {
-      navigate(`/${placeId}/projects`);
+      navigate(`/${placeId}/${projectId}`);
     } else if (position === "placeDetails") {
       navigate("/places");
     } else {
@@ -55,7 +57,7 @@ export function NavigationControls() {
       if (currentTabIndex > 0) {
         navigate(`/${placeId}/${projectId}/${projectTabs[currentTabIndex - 1]}`);
       } else {
-        navigate(`/${placeId}/projects`);
+        video ? navigate(`/${placeId}/${projectId}/video`) : navigate(`/${placeId}/projects`);
       }
     }
   };

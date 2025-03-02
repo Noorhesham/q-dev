@@ -14,7 +14,7 @@ export default function ProjectTabs() {
       {isRootProjectPath && (
         <>
           {" "}
-          <div className="mix-blend-multiply bg-[#003B5C] absolute left-0 top-0 z-10 w-full h-full"></div>
+          <div className="mix-blend-multiply bg-main2 absolute left-0 top-0 z-10 w-full h-full"></div>
           <img src="/Rectangle 3 (6).png" className="object-cover w-full absolute inset-0 h-full" alt="" />
         </>
       )}

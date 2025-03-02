@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useNav } from "@/context/NavContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const Slide5 = () => {
+const Slide5 = ({ setCurrentSlide,setSelectedLogo }) => {
   const values = ["/logo1.png", "/logoo2.png", "/logo3.png", "logo4.svg"];
   const { setTitle } = useNav();
   useEffect(() => {
@@ -27,6 +27,10 @@ const Slide5 = () => {
           <div className="grid mt-20 grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
+                onClick={() => {
+                  setSelectedLogo(value);
+                  setCurrentSlide(5);
+                }}
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

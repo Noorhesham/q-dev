@@ -5,7 +5,7 @@ import SvgQ2 from "@/components/SvgQ2";
 import { useEffect } from "react";
 import { useNav } from "@/context/NavContext";
 
-const Slide6 = () => {
+const Slide6 = ({ selectedLogo }) => {
   const { setTitle } = useNav();
   useEffect(() => {
     setTitle("Our Partener");

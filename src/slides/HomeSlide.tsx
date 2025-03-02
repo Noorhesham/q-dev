@@ -4,7 +4,13 @@ import SpcialButton from "@/components/SpcialButton";
 import AnimatedSvgQ from "@/components/SvgQ";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useNav } from "@/context/NavContext";
+import { useEffect } from "react";
 export const HomeSlide = () => {
+  const { setTitle } = useNav();
+  useEffect(() => {
+    setTitle("Main Page");
+  }, []);
   return (
     <div className="min-h-screen  flex justify-center relative overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-main2 z-20 mix-blend-multiply" />
@@ -37,7 +43,7 @@ export const HomeSlide = () => {
 
             <Link to={"/places"}>
               <SpcialButton>
-                <span>مشارعينـــــــا</span>
+                <span className=" font-cairo">مشارعينـــــــا</span>
                 <span className="special-font">Our Projects</span>
               </SpcialButton>
             </Link>

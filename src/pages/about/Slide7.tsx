@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useNav } from "@/context/NavContext";
 import { useEffect } from "react";
+import ModelCustom from "@/components/ModelCustom";
 
 const Slide7 = () => {
   const certificates = [
@@ -56,21 +57,27 @@ const Slide7 = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {certificates.map((cert, index) => (
-              <motion.div
+              <ModelCustom
+                btn={
+                  <motion.div
+                    key={cert.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className="group relative aspect-[3/4] bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
+                  >
+                    <img src={cert.image || "/placeholder.svg"} alt={cert.title} className="object-contain p-4" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="absolute bottom-4 left-4 right-4 text-white">
+                        <h3 className="font-semibold mb-1">{cert.title}</h3>
+                        <p className="text-sm text-cream/80">{cert.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                }
+                content={<img src={cert.image || "/placeholder.svg"} alt={cert.title} className="object-contain p-4" />}
                 key={cert.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group relative aspect-[3/4] bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
-              >
-                <img src={cert.image || "/placeholder.svg"} alt={cert.title} className="object-contain p-4" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="font-semibold mb-1">{cert.title}</h3>
-                    <p className="text-sm text-cream/80">{cert.description}</p>
-                  </div>
-                </div>
-              </motion.div>
+              />
             ))}
           </div>
         </div>

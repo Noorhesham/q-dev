@@ -1,29 +1,37 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import AnimatedSvgQ from "@/components/SvgQ";
+import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
 
 const places = [
   {
     id: "north-coast",
     name: "North Coast",
-    image:'/place1.png',
+    image: "/place1.png",
   },
   {
     id: "alexandria",
     name: "Alexandria",
-    image:'/place1.png',
+    image: "/Rectangle 7 (6).png",
   },
   {
     id: "new-zayed",
     name: "New Zayed",
-    image:'/place2.png',
+    image: "/place2.png",
   },
 ];
 
 export default function Places() {
+  const navigate = useNavigate();
+
   return (
-    <div className="relative flex justify-center items-center min-h-screen bg-[#003B5C] overflow-hidden">
+    <div className="relative flex justify-center items-center min-h-screen bg-main2 overflow-hidden">
+      {" "}
+      <div className="absolute inset-0 mix-blend-multiply ">
+        <img src="/Rectangle 3 (8).png" alt="Background Pattern" className="object-cover z-10 bg-fixed" />
+      </div>
       <div className=" mix-blend-multiply absolute left-0 top-0 z-10 w-96">
         <AnimatedSvgQ />
       </div>
@@ -44,15 +52,23 @@ export default function Places() {
                 />
                 <div className="absolute inset-0  " />
                 <div className=" flex items-stretch  absolute bottom-6 left-0">
-                  <img src="/q.png" className=" h-12" alt="" />
-                  <h2 className="text-2xl bg-main2 h-full  px-10 py-2 rounded-r-2xl text-white font-semibold">
+                  <img src="/Vector (18).png" alt="Q" className="w-[44px] mix-blend-multiply h-auto" />
+                  <h2 className="text-2xl bg-main2 h-full special-font  px-10 py-2 mix-blend-multiply rounded-r-2xl text-white font-semibold">
                     {place.name}
                   </h2>
                 </div>
               </motion.div>
             </Link>
           ))}
-        </div>
+        </div>{" "}
+        <Button
+          onClick={() => navigate("/")}
+          variant="default"
+          size="lg"
+          className="fixed !px-4  !py-6 cursor-pointer hover:bg-white hover:text-gray-800 bottom-8 right-36 duration-200 rounded-full text-white bg-main2 z-50 backdrop-blur-sm"
+        >
+          <Home className="h-8 w-8" />
+        </Button>
       </MaxWidthWrapper>
     </div>
   );

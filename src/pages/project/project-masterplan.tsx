@@ -10,7 +10,7 @@ export default function MasterPlan() {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="relative min-h-screen flex justify-center items-center bg-[#003B5C]">
+    <div className="relative min-h-screen flex justify-center items-center bg-main2">
       {" "}
       <div className="mix-blend-multiply bg-main2 absolute left-0 top-0 z-10 w-full h-full"></div>
       <motion.div
