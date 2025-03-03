@@ -53,7 +53,8 @@ export default function Places() {
                 <div className="absolute inset-0  " />
                 <div className=" flex items-stretch  absolute bottom-6 left-0">
                   <img src="/Vector (18).png" alt="Q" className="w-[44px] mix-blend-multiply h-auto" />
-                  <h2 className="text-2xl bg-main2 h-full special-font  px-10 py-2 mix-blend-multiply rounded-r-2xl text-white font-semibold">
+                  <h2 className="text-2xl bg-main2 h-full special-font  px-10 py-2 mix-blend-multiply rounded-r-2xl
+                   text-gray-50 font-semibold">
                     {place.name}
                   </h2>
                 </div>

@@ -58,7 +58,6 @@ export default function MasterPlan() {
                   className="flex items-center gap-2 text-white hover:text-cream/80 transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
-                  Back to Master Plan
                 </button>
                 <h1 className="text-2xl text-white">Floor Plans</h1>
               </div>

@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Home } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ButtonCustom } from "@/components/ButtonCustom";
 
 export default function PlaceDetail() {
   const navigate = useNavigate();
-  const params=useParams();
+  const params = useParams();
   return (
     <div className="relative  min-h-screen  overflow-hidden">
       <div className=" absolute inset-0 w-full h-full bg-main2 z mix-blend-multiply z-10"></div>
@@ -29,19 +29,25 @@ export default function PlaceDetail() {
             </div>
           </motion.div>
         </div>{" "}
-        <div  className="  z-50 w-full  -bottom-20 left-0   absolute">
+        <div className="  z-50 w-full  -bottom-20 left-0   absolute">
           <div className="  special-font flex items-center gap-4 z-50">
             {" "}
-            <ButtonCustom variant="outline" size="lg" disabled={true} className="backdrop-blur-sm">
-              Prev <ChevronLeft className="h-4 w-4" />
+            <ButtonCustom variant="outline"  onClick={() => navigate(-1)} className="backdrop-blur-sm">
+              <div className=" bg-main text-black  p-1 rounded-full mx-2">
+                <ArrowLeft className="h-4 w-4    " />
+              </div>
+              Prev{" "}
             </ButtonCustom>
             <ButtonCustom
               variant="outline"
-              size="lg"
+              
               onClick={() => navigate(`/${params.placeId}/projects`)}
               className="backdrop-blur-sm hover:text-white bg-main text-main2 font-semibold special-font"
             >
-              Next <ChevronRight className="h-4 w-4" />
+              Next{" "}
+              <div className="bg-main2 text-main  p-1 rounded-full mx-2">
+                <ArrowRight className="h-4 w-4    " />
+              </div>
             </ButtonCustom>
           </div>{" "}
           <Button

@@ -35,7 +35,7 @@ const Start = () => {
 
   return (
     <div className="min-h-screen bg-main2">
-      <MaxWidthWrapper className="relative pt-20 z-10 flex items-center flex-col gap-5">
+      <MaxWidthWrapper className="relative pt-20 z-10 flex items-center flex-col gap-8">
         <motion.img
           layoutId="shared-logo"
           initial={{ opacity: 0, y: -20 }}

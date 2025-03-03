@@ -45,6 +45,9 @@ const Slide4 = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background image */}
+      <div className="absolute inset-0 opacity-30">
+        <img src="/Rectangle 3 (2).png" alt="Background Pattern" className="object-cover z-10 bg-fixed" />
+      </div>
       <MaxWidthWrapper className="text-white z-30 relative">
         <div className="pt-24 pb-16">
           <div className="grid grid-cols-3 gap-8 mt-16">
@@ -58,7 +61,7 @@ const Slide4 = () => {
                 onMouseEnter={() => setHoveredMember(index)}
                 onMouseLeave={() => setHoveredMember(null)}
               >
-                <div className="relative aspect-square rounded-[32px] overflow-hidden">
+                <div className="relative aspect-square h-[22rem] rounded-[32px] overflow-hidden">
                   <motion.img
                     src={member.image}
                     alt={member.name}
@@ -73,8 +76,8 @@ const Slide4 = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="flex items-start">
-                      <img src="/Vector (18).png" alt="Q" className="w-[44px] mix-blend-multiply h-auto" />
-                      <div className="mix-blend-multiply rounded-full px-4 py-[1px] rounded-l-none bg-main2 flex-col">
+                      <img src="/Vector (18).png" alt="Q" className="w-[44px]  h-auto" />
+                      <div className=" rounded-full px-4 py-[1px] rounded-l-none bg-main2 flex-col">
                         <h3 className="text-lg font-semibold">{member.name}</h3>
                         <p className="text-sm text-nowrap text-cream/80">{member.role}</p>
                       </div>

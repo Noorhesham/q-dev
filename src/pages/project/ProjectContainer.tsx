@@ -4,7 +4,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { ButtonCustom } from "@/components/ButtonCustom";
-import { ChevronLeft, Home } from "lucide-react";
+import { ArrowLeft, ChevronLeft, Home } from "lucide-react";
 
 const projects = [
   {
@@ -22,7 +22,7 @@ const projects = [
 export default function Projects() {
   const { placeId } = useParams();
   const navigate = useNavigate();
-  const video=true
+  const video = true;
   return (
     <div className="relative min-h-screen bg-main2 overflow-hidden">
       {" "}
@@ -33,7 +33,7 @@ export default function Projects() {
         <Header view={false} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
           {projects.map((project, index) => (
-            <Link to={video?`/${placeId}/${project.id}/video`:`/${placeId}/${project.id}`} key={project.id}>
+            <Link to={video ? `/${placeId}/${project.id}/video` : `/${placeId}/${project.id}`} key={project.id}>
               <motion.div
                 className="group relative aspect-video rounded-[32px] overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
@@ -56,12 +56,17 @@ export default function Projects() {
           ))}
         </div>{" "}
         <div className="z-50 w-full -bottom-20 left-28 absolute">
-          <div className="special-font flex items-center gap-4 z-50">
-            <ButtonCustom variant="outline" size="lg" onClick={() => navigate(`/${placeId}`)} className="backdrop-blur-sm">
-              Prev <ChevronLeft className="h-4 w-4" />
-            </ButtonCustom>
-          </div>
-
+          <ButtonCustom
+            variant="outline"
+            onClick={() => navigate(`/${placeId}`)}
+            className="backdrop-blur-sm uppercase  special-font flex items-center gap-4 z-50 !py-5 !px-4  "
+          >
+            {" "}
+            <div className=" bg-main text-black  p-1 rounded-full mx-2">
+              <ArrowLeft className="h-4 w-4    " />
+            </div>
+            Prev
+          </ButtonCustom>
           <Button
             onClick={() => navigate("/")}
             variant="default"

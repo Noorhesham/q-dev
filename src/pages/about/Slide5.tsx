@@ -30,7 +30,7 @@ const Slide5 = ({ setCurrentSlide,setSelectedLogo }) => {
                 onClick={() => {
                   setSelectedLogo(value);
                   setCurrentSlide(5);
-                }}
+                }} className=" cursor-pointer"
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
