@@ -32,7 +32,7 @@ export default function PlaceDetail() {
         <div className="  z-50 w-full  -bottom-20 left-0   absolute">
           <div className="  special-font flex items-center gap-4 z-50">
             {" "}
-            <ButtonCustom variant="outline"  onClick={() => navigate(-1)} className="backdrop-blur-sm">
+            <ButtonCustom variant="outline" onClick={() => navigate(`/places`)} className="backdrop-blur-sm">
               <div className=" bg-main text-black  p-1 rounded-full mx-2">
                 <ArrowLeft className="h-4 w-4    " />
               </div>
@@ -40,7 +40,6 @@ export default function PlaceDetail() {
             </ButtonCustom>
             <ButtonCustom
               variant="outline"
-              
               onClick={() => navigate(`/${params.placeId}/projects`)}
               className="backdrop-blur-sm hover:text-white bg-main text-main2 font-semibold special-font"
             >

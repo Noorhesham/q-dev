@@ -6,7 +6,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { ChevronLeft } from "lucide-react";
 import Header from "@/components/Header";
 
-export default function MasterPlan() {
+export default function MasterPlan({}) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -72,9 +72,9 @@ export default function MasterPlan() {
                     <h2 className="text-white text-xl">Ground Floor</h2>
                     <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
                       <img
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lZEwjKBaJp5gNXdT0dzfnEev4bYPvG.png"
+                        src="/23b39f_f4192ed1dbe648e4b7acb441498ee674_mv2-1024x576 1 (2).png"
                         alt="Ground Floor Plan"
-                        className="w-full h-full object-contain p-4"
+                        className="w-full h-full  object-cover"
                       />
                     </div>
                   </motion.div>
@@ -88,9 +88,9 @@ export default function MasterPlan() {
                     <h2 className="text-white text-xl">First Floor</h2>
                     <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
                       <img
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lZEwjKBaJp5gNXdT0dzfnEev4bYPvG.png"
+                        src="/23b39f_f4192ed1dbe648e4b7acb441498ee674_mv2-1024x576 1 (2).png"
                         alt="First Floor Plan"
-                        className="w-full h-full object-contain p-4"
+                        className="w-full h-full  object-cover"
                       />
                     </div>
                   </motion.div>
@@ -101,11 +101,7 @@ export default function MasterPlan() {
                   transition={{ delay: 0.4 }}
                   className=" h-96 w-full rounded-3xl overflow-hidden"
                 >
-                  <img
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lZEwjKBaJp5gNXdT0dzfnEev4bYPvG.png"
-                    alt="Property View"
-                    className="w-full h-full object-cover"
-                  />
+                  <img src="/Rectangle 8 (1).png" alt="Property View" className="w-full h-full object-cover" />
                 </motion.div>
               </div>
             </motion.div>

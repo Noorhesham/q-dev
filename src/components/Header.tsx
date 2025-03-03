@@ -8,6 +8,7 @@ const Header = ({
   col,
   className,
   paraClassName,
+  children,
 }: {
   title: string;
   view?: boolean;
@@ -15,19 +16,23 @@ const Header = ({
   col?: boolean;
   className?: string;
   paraClassName?: string;
+  children?: React.ReactNode;
 }) => {
   const { placeId } = useParams();
 
   return (
     <div>
       <div className={`${col && "flex-col"} ${className && className} flex text-white items-start gap-14 `}>
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={` ${className} !w-fit text-nowrap text-6xl special-font font-special`}
-        >
-          North Coast
-        </motion.h1>
+        <div className="flex justify-between w-full items-center">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={` ${className} !w-fit text-nowrap text-6xl special-font font-special`}
+          >
+            North Coast
+          </motion.h1>
+          {children}
+        </div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
