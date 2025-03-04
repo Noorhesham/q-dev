@@ -4,6 +4,8 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import AnimatedSvgQ from "@/components/SvgQ";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
+import { HomeButton } from "@/components/PrevNextButtons";
+import Label from "@/components/Label";
 
 const places = [
   {
@@ -51,25 +53,12 @@ export default function Places() {
                   className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-110"
                 />
                 <div className="absolute inset-0  " />
-                <div className=" flex items-stretch  absolute bottom-6 left-0">
-                  <img src="/Vector (18).png" alt="Q" className="w-[44px] mix-blend-multiply h-auto" />
-                  <h2 className="text-2xl bg-main2 h-full special-font  px-10 py-2 mix-blend-multiply rounded-r-2xl
-                   text-gray-50 font-semibold">
-                    {place.name}
-                  </h2>
-                </div>
+                <Label text={place.name} />
               </motion.div>
             </Link>
           ))}
         </div>{" "}
-        <Button
-          onClick={() => navigate("/")}
-          variant="default"
-          size="lg"
-          className="fixed !px-4  !py-6 cursor-pointer hover:bg-white hover:text-gray-800 bottom-8 right-36 duration-200 rounded-full text-white bg-main2 z-50 backdrop-blur-sm"
-        >
-          <Home className="h-8 w-8" />
-        </Button>
+        <HomeButton onClick={() => navigate("/")} />
       </MaxWidthWrapper>
     </div>
   );

@@ -64,7 +64,7 @@ const Slide7 = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="group relative aspect-[3/4] bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
+                    className="group relative cursor-pointer aspect-[3/4] bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
                   >
                     <img src={cert.image || "/placeholder.svg"} alt={cert.title} className="object-contain p-4" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">

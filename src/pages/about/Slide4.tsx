@@ -44,8 +44,9 @@ const Slide4 = () => {
   }, []);
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 opacity-30">
+      {/* Background image */}{" "}
+      <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
+      <div className="absolute inset-0">
         <img src="/Rectangle 3 (2).png" alt="Background Pattern" className="object-cover z-10 bg-fixed" />
       </div>
       <MaxWidthWrapper className="text-white z-30 relative">
@@ -86,7 +87,7 @@ const Slide4 = () => {
 
                   {/* Hover overlay with fade in */}
                   <motion.div
-                    className="absolute w-fit bg-transparent left-0 h-fit top-5"
+                    className="absolute w-full bg-transparent left-0 h-full top-0"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{
                       opacity: hoveredMember === index ? 1 : 0,
@@ -94,9 +95,8 @@ const Slide4 = () => {
                     }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="flex items-start">
-                      <img src="/Vector (18).png" alt="Q" className="w-[44px]  h-auto" />
-                      <div className=" rounded-3xl px-4 py-[1px] rounded-l-none bg-main2 flex-col">
+                    <div className="flex items-start h-full">
+                      <div className=" rounded-3xl px-4 py-3 h-full rounded-l-none bg-main2/80 flex-col">
                         <h3 className="text-lg font-semibold">{member.name}</h3>
                         <p className="text-sm text-nowrap text-cream/80">{member.role}</p>{" "}
                         <div className="text-sm text-cream/90 space-y-4">

@@ -9,8 +9,9 @@ const Slide3 = () => {
   }, []);
   return (
     <div className="relative min-h-screen  overflow-hidden">
-      {/* Background Wave Pattern */}
-      <div className="absolute inset-0 opacity-30">
+      {/* Background Wave Pattern */}{" "}
+      <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
+      <div className="absolute inset-0 ">
         <img src="/Rectangle 3 (2).png" alt="Background Pattern" className="object-cover z-10 bg-fixed" />
       </div>
       <MaxWidthWrapper className="text-white z-30 relative container mx-auto">

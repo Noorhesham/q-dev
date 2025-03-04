@@ -9,6 +9,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import ModelCustom from "@/components/ModelCustom";
+import { Switch } from "@/components/ui/switch";
 
 const lightImages = [
   { id: 1, thumbnail: "/Rectangle 3 (1).png" },
@@ -25,37 +26,28 @@ const darkImages = [
 ];
 
 export default function Images() {
-  const [activeTab, setActiveTab] = useState("light");
-
+  const [isLightMode, setIsLightMode] = useState(true);
   return (
-    <div className="relative min-h-screen bg-main2">
+    <div className="relative min-h-screen ">
+      {" "}
+      <div className="mix-blend-multiply bg-main2 absolute left-0 top-0 z-10 w-full h-full"></div>
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.1, opacity: 0.8 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      >
+        <img src="/Rectangle 3 (4).png" alt="Background Pattern" className="object-cover w-full h-full bg-fixed" />
+      </motion.div>
       <MaxWidthWrapper className="relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-16">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-16 flex flex-col">
           <div className="self-center mx-auto my-5 w-fit flex flex-col items-center text-center">
-            <Header className="items-center text-center" col view={false}>
-              <div className="flex gap-4 mt-6">
-                <Button
-                  className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all shadow-md ${
-                    activeTab === "light"
-                      ? "bg-gradient-to-r from-blue-500 to-blue-700 text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-100"
-                  }`}
-                  onClick={() => setActiveTab("light")}
-                >
-                  Light Images
-                </Button>
-                <Button
-                  className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all shadow-md ${
-                    activeTab === "dark"
-                      ? "bg-gradient-to-r from-gray-800 to-gray-900 text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-100"
-                  }`}
-                  onClick={() => setActiveTab("dark")}
-                >
-                  Dark Images
-                </Button>
-              </div>
-            </Header>
+            <Header className="items-center !mx-auto text-center" col />
+          </div>
+          <div className="  z-10 flex special-font items-center mx-auto space-x-4">
+            <span className="text-white">Light Renders</span>
+            <Switch checked={!isLightMode} onCheckedChange={() => setIsLightMode(!isLightMode)} />
+            <span className="text-white">Dark Renders</span>
           </div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
@@ -68,7 +60,7 @@ export default function Images() {
               navigation={{ prevEl: ".swiper-button-prev", nextEl: ".swiper-button-next" }}
               className="w-full mt-6"
             >
-              {(activeTab === "light" ? lightImages : darkImages).map((image) => (
+              {(isLightMode ? lightImages : darkImages).map((image) => (
                 <SwiperSlide key={image.id}>
                   <ModelCustom
                     btn={

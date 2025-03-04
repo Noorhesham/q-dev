@@ -1,10 +1,7 @@
 "use client";
-import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
-import { ButtonCustom } from "@/components/ButtonCustom";
-import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { HomeButton, NextButton, PrevButton } from "./PrevNextButtons";
 //page name
 const projectTabs = ["about", "location", "facilities", "masterplan", "videos", "images"];
 
@@ -29,7 +26,6 @@ export function NavigationControls() {
   };
 
   const position = getCurrentPosition();
-  // Navigation logic
   const video = true;
 
   const goNext = () => {
@@ -45,12 +41,9 @@ export function NavigationControls() {
       const currentTabIndex = projectTabs.indexOf(position);
       if (currentTabIndex < projectTabs.length - 1) {
         navigate(`/${placeId}/${projectId}/${projectTabs[currentTabIndex + 1]}`);
-      }
-      else navigate('/places')
+      } else navigate("/places");
     }
   };
-  const params = useParams();
-  console.log(position);
   const goPrev = () => {
     if (position === "projects") {
       navigate(`/${placeId}`);
@@ -90,43 +83,11 @@ export function NavigationControls() {
   return (
     <MaxWidthWrapper className="z-50 w-full bottom-0 left-28 absolute">
       <div className="special-font flex items-center gap-4 z-50">
-        <ButtonCustom
-          variant="outline"
-          onClick={goPrev}
-          disabled={isPrevDisabled()}
-          className="backdrop-blur-sm uppercase !py-5 !px-4  "
-        >
-          {" "}
-          <div className=" bg-main text-black  p-1 rounded-full mx-2">
-            <ArrowLeft className="h-4 w-4    " />
-          </div>
-          Prev
-        </ButtonCustom>
-        <ButtonCustom
-          variant="outline"
-          onClick={goNext}
-          disabled={isNextDisabled()}
-          className="backdrop-blur-sm hover:text-white uppercase  !py-5 !px-4  bg-main text-main2 font-semibold special-font"
-        >
-          Next{" "}
-          <div className="bg-main2 text-main  p-1 rounded-full mx-2">
-            <ArrowRight className="h-4 w-4    " />
-          </div>
-        </ButtonCustom>
+        <PrevButton disabled={isPrevDisabled()} onClick={goPrev} />
+        <NextButton disabled={isNextDisabled()} onClick={goNext} />
       </div>
 
-      <Button
-        onClick={goHome}
-        variant="default"
-        size="lg"
-        className="fixed !px-4 !py-6 cursor-pointer  hover:bg-main2/40 hover:text-gray-800 bottom-8 right-36 duration-200 rounded-full text-white bg-main2 z-50 backdrop-blur-sm"
-      >
-        {position !== "video" && position !== `defaultPath` ? (
-          <img src="/icon.svg" className=" h-5 w-5 object-contain" />
-        ) : (
-          <Home className="h-10 w-10" />
-        )}
-      </Button>
+      <HomeButton exit={position !== "video" && position !== `defaultPath`} onClick={goHome} />
     </MaxWidthWrapper>
   );
 }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ButtonCustom } from "@/components/ButtonCustom";
+import { HomeButton, NextButton, PrevButton } from "@/components/PrevNextButtons";
 
 export default function PlaceDetail() {
   const navigate = useNavigate();
@@ -29,34 +30,15 @@ export default function PlaceDetail() {
             </div>
           </motion.div>
         </div>{" "}
-        <div className="  z-50 w-full  -bottom-20 left-0   absolute">
-          <div className="  special-font flex items-center gap-4 z-50">
-            {" "}
-            <ButtonCustom variant="outline" onClick={() => navigate(`/places`)} className="backdrop-blur-sm">
-              <div className=" bg-main text-black  p-1 rounded-full mx-2">
-                <ArrowLeft className="h-4 w-4    " />
-              </div>
-              Prev{" "}
-            </ButtonCustom>
-            <ButtonCustom
-              variant="outline"
-              onClick={() => navigate(`/${params.placeId}/projects`)}
-              className="backdrop-blur-sm hover:text-white bg-main text-main2 font-semibold special-font"
-            >
-              Next{" "}
-              <div className="bg-main2 text-main  p-1 rounded-full mx-2">
-                <ArrowRight className="h-4 w-4    " />
-              </div>
-            </ButtonCustom>
-          </div>{" "}
-          <Button
-            onClick={() => navigate("/")}
-            variant="default"
-            size="lg"
-            className="fixed !px-4  !py-6 cursor-pointer hover:bg-white hover:text-gray-800 bottom-8 right-36 duration-200 rounded-full text-white bg-main2 z-50 backdrop-blur-sm"
-          >
-            <Home className="h-8 w-8" />
-          </Button>
+        <div className="  relative mt-auto">
+          <div className="z-50 relative w-full">
+            <div className="special-font absolute -bottom-20 left-0 flex items-center gap-4 z-50">
+              <PrevButton onClick={() => navigate(`/places`)} />
+              <NextButton onClick={() => navigate(`/${params.placeId}/projects`)} />
+            </div>
+
+            <HomeButton onClick={() => navigate("/")} />
+          </div>
         </div>
       </MaxWidthWrapper>
     </div>

@@ -36,11 +36,21 @@ const videos = [
 
 export default function Videos() {
   return (
-    <div className="relative min-h-screen bg-main2">
+    <div className="relative min-h-screen ">
+      {" "}
+      <div className="mix-blend-multiply bg-main2 absolute left-0 top-0 z-10 w-full h-full"></div>
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.1, opacity: 0.8 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      >
+        <img src="/Rectangle 3 (4).png" alt="Background Pattern" className="object-cover w-full h-full bg-fixed" />
+      </motion.div>
       <MaxWidthWrapper className="relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-16">
           <div className=" self-center mx-auto my-5 w-fit flex flex-col !items-center text-center">
-            <Header className=" !items-center text-center" col view={false} />
+            <Header className="items-center !mx-auto text-center" col />
           </div>
 
           <motion.div

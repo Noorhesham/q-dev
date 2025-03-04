@@ -3,7 +3,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useNav } from "@/context/NavContext";
 import { useEffect, useState } from "react";
 
-const Slide5 = ({ setCurrentSlide,setSelectedLogo }) => {
+const Slide5 = ({ setCurrentSlide, setSelectedLogo }) => {
   const values = ["/logo1.png", "/logoo2.png", "/logo3.png", "logo4.svg"];
   const { setTitle } = useNav();
   useEffect(() => {
@@ -11,7 +11,9 @@ const Slide5 = ({ setCurrentSlide,setSelectedLogo }) => {
   }, []);
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 opacity-30">
+      {" "}
+      <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
+      <div className="absolute inset-0 ">
         <img src="/Rectangle 3 (5).png" alt="Background Pattern" className="object-cover z-10 bg-fixed" />
       </div>
       <MaxWidthWrapper className="text-white z-30 relative container mx-auto">
@@ -30,7 +32,8 @@ const Slide5 = ({ setCurrentSlide,setSelectedLogo }) => {
                 onClick={() => {
                   setSelectedLogo(value);
                   setCurrentSlide(5);
-                }} className=" cursor-pointer"
+                }}
+                className=" cursor-pointer"
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

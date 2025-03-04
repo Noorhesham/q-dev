@@ -27,13 +27,14 @@ const Slide2 = () => {
     setTitle("Mission , Vision & Values");
   }, []);
   return (
-    <div className="relative min-h-screen bg-main2 overflow-hidden">
+    <div className="relative min-h-screen  overflow-hidden">
       {/* Background Wave Pattern */}
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
+      <div className="absolute inset-0  ">
         <img src="/Rectangle 3 (1).png" alt="Background Pattern" className="object-cover bg-fixed" />
       </div>
 
-      <MaxWidthWrapper className="relative pt-20 z-10">
+      <MaxWidthWrapper className="relative pt-20 z-40">
         <motion.div className=" flex flex-col gap-1" variants={container} initial="hidden" animate="show">
           {/* Vision Section */}
           <ItemCardGrid

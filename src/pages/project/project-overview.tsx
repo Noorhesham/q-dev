@@ -29,7 +29,7 @@ export default function About() {
   const sentences = paragraphContent.split(". ").map((sentence) => sentence.trim() + ".");
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen poppins overflow-hidden">
       {/* Background SVG animation */}
       <motion.div
         initial={{ x: -50, opacity: 0 }}
@@ -94,7 +94,7 @@ export default function About() {
                 initial="hidden"
                 animate="visible"
                 variants={textVariants}
-                className="leading-relaxed"
+                className="leading-relaxed text-sm"
               >
                 {sentence}
               </motion.p>
