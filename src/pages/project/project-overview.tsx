@@ -1,12 +1,18 @@
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { motion } from "framer-motion";
+import { useProject } from "@/context/ProjectContext";
+import { BACKEND_API } from "@/constants";
 
 export default function About() {
+  const { currentProject } = useProject();
+
+  if (!currentProject) return null;
+
   // Animation variants for staggered text reveal
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
@@ -18,19 +24,14 @@ export default function About() {
   };
 
   // Split paragraph into sentences for staggered animation
-  const paragraphContent =
-    "Q Developments was established in 2022 to engrave its signature in the Egyptian market for a lifetime by " +
-    "introducing quality homes to the Egyptian society in perfectly planned projects that provide integrated " +
-    "services. Q Developments strives to provide affordable quality homes, exceptional experience & highest " +
-    "quality service to be presented to the Egyptian culture with a good return on investment. A young & dynamic " +
-    "real-estate developer built on the collective efforts and expertise of a team of professionals with decades " +
-    "of experience in real-estate, construction, design and property management.";
-
-  const sentences = paragraphContent.split(". ").map((sentence) => sentence.trim() + ".");
-
+  const paragraphContent = currentProject.about?.content || "";
+  const sentences = paragraphContent
+    .split(". ")
+    .filter(Boolean)
+    .map((sentence) => (sentence.endsWith(".") ? sentence : sentence + "."));
+  console.log(currentProject);
   return (
-    <div className="relative min-h-screen poppins overflow-hidden">
-      {/* Background SVG animation */}
+    <div className="relative min-h-screen overflow-hidden">
       <motion.div
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -39,65 +40,43 @@ export default function About() {
       >
         <SvgQ2 />
       </motion.div>
-
-      {/* Background image with subtle parallax effect */}
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.1, opacity: 0.8 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.5 }}
+        viewport={{ once: true }}
       >
-        <img src="/Rectangle 3 (4).png" alt="Background Pattern" className="object-cover w-full h-full bg-fixed" />
+        <img
+          src={`${BACKEND_API}/${currentProject.lightImages?.[0]}`}
+          alt="Background Pattern"
+          className="object-cover w-full h-full bg-fixed"
+        />
       </motion.div>
-
-      <MaxWidthWrapper className="text-white z-30 relative container mx-auto">
-        <div className="pt-32 flex max-w-2xl flex-col gap-5 items-start">
-          {/* Logo reveal animation */}
-          <motion.img
-            initial={{ x: "100%", opacity: 0, rotate: -5 }}
-            animate={{ x: 0, opacity: 1, rotate: 0 }}
-            transition={{
-              duration: 0.8,
-              type: "spring",
-              stiffness: 100,
-              damping: 15,
-            }}
-            layoutId="shared-logo"
-            src="/logo3.png"
-            className="w-80"
-            alt="Q Developments Logo"
-          />
-
-          {/* Heading with letter reveal effect */}
-          <motion.div
-            className="w-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+      <MaxWidthWrapper className="relative z-30 text-white">
+        <div className="max-w-3xl z-30 py-32">
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="special-font text-5xl  mb-12"
           >
-            <motion.h2
-              className="special-font text-5xl text-cream text-left"
-              initial={{ letterSpacing: "0.5em", opacity: 0 }}
-              animate={{ letterSpacing: "normal", opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            >
-              Our Achievements
-            </motion.h2>
-          </motion.div>
+            {currentProject.title}
+          </motion.h1>
 
           {/* Staggered paragraph reveal */}
           <div className="space-y-4">
             {sentences.map((sentence, index) => (
-              <motion.p
+              <motion.div
                 key={index}
                 custom={index}
                 initial="hidden"
                 animate="visible"
                 variants={textVariants}
                 className="leading-relaxed text-sm"
-              >
-                {sentence}
-              </motion.p>
+                dangerouslySetInnerHTML={{ __html: sentence }}
+              />
             ))}
           </div>
 

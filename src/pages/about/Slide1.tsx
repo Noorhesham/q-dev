@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { useNav } from "@/context/NavContext";
+import { BACKEND_API } from "@/constants";
 
 const Counter = ({ value, prefix }: { value: number; prefix?: string }) => {
   const count = useMotionValue(0);
@@ -25,11 +26,22 @@ const Counter = ({ value, prefix }: { value: number; prefix?: string }) => {
   );
 };
 
-const Slide1 = () => {
+const Slide1 = ({
+  data,
+}: {
+  data: {
+    pageTitle: string;
+    title: string;
+    content: string;
+    background: string;
+    numbers: [{ _id: number; prefix: string; number: number; description: string }];
+  };
+}) => {
+  console.log(data);
   const { setTitle } = useNav();
   useEffect(() => {
-    setTitle("About Us");
-  }, []);
+    setTitle(data.pageTitle || "About Us");
+  }, [data]);
   return (
     <div className="relative poppins min-h-screen overflow-hidden">
       <motion.div
@@ -40,51 +52,25 @@ const Slide1 = () => {
       >
         <SvgQ2 />
       </motion.div>
-      <img src="/Rectangle 3.png" className="object-cover w-full absolute inset-0 h-full" alt="" />
+      <img src={`${BACKEND_API}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
 
       <MaxWidthWrapper className="text-white z-30 relative container mx-auto">
         <div className="max-w-3xl py-32">
-          <h1 className="special-font text-6xl text-cream mb-8">Reach to the Beyond</h1>
+          <h1 className="special-font text-6xl text-cream mb-8">{data.title}</h1>
 
           <div className="space-y-4 text-sm font-normal text-cream/80">
-            <p>
-              Q Developments was established in 2023 to engrave its signature in the Egyptian market for a lifetime by
-              introducing quality homes to the Egyptian society in perfectly planned projects that provide integrated
-              services.
-            </p>
-            <p>
-              Q Developments strives to provide affordable quality homes, exceptional experience & highest quality
-              service to be presented to the Egyptian culture with a good return on investment.
-            </p>
-            <p>
-              A young & dynamic real-estate developer built on the collective efforts and expertise of a team of
-              professionals with decades of experience in real-estate, construction, design and property management.
-            </p>
+            <div dangerouslySetInnerHTML={{ __html: data?.content }} />
           </div>
 
           <div className="grid grid-cols-3 gap-8 mt-16">
-            <div className="text-cream">
-              <div className="special-font text-5xl mb-2">
-                <Counter prefix="Billion<br/>Pounds" value={22} />
+            {data?.numbers?.map((item) => (
+              <div key={item._id} className="text-cream">
+                <div className="special-font text-5xl mb-2">
+                  <Counter prefix={item.prefix} value={item.number} />
+                </div>
+                <div className="text-sm opacity-80 uppercase leading-tight text-white">{item.description}</div>
               </div>
-              <div className="text-sm opacity-80 uppercase leading-tight text-white">OF CURRENT INVESTMENT</div>
-            </div>
-            <div className="text-cream">
-              <div className="special-font text-5xl mb-2">
-                <Counter prefix="Areas<br/> 1m sgm" value={260} />
-              </div>
-              <div className="text-sm opacity-80 uppercase leading-tight text-white">
-                LAND BANK IN THE NORTH COAST AND NEW ZAYED
-              </div>
-            </div>
-            <div className="text-cream">
-              <div className="special-font text-5xl mb-2">
-                <Counter prefix="Billion<br/>Pounds" value={12} />
-              </div>
-              <div className="text-sm opacity-80 uppercase leading-tight text-white">
-                OF PLANNED INVESTMENTS IN THE NEAR FUTURE
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </MaxWidthWrapper>

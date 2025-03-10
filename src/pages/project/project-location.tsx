@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { ShoppingCart, Plane, Building2, GraduationCap } from "lucide-react";
 import Header from "@/components/Header";
+import { useProject } from "@/context/ProjectContext";
+import { BACKEND_API } from "@/constants";
 
 const locations = [
   {
@@ -32,7 +34,8 @@ const locations = [
 ];
 
 const Location = () => {
-  const [selectedLocation, setSelectedLocation] = useState(locations[0]); // Default to the first location
+  const { currentProject } = useProject();
+  const [selectedLocation, setSelectedLocation] = useState(currentProject?.location.numbers[0]); // Default to the first location
 
   return (
     <div className="text-white min-h-screen pt-20">
@@ -44,14 +47,18 @@ const Location = () => {
         transition={{ duration: 1.5 }}
         viewport={{ once: true }}
       >
-        <img src="/Rectangle 3 (4).png" alt="Background Pattern" className="object-cover w-full h-full bg-fixed" />
+        <img
+          src={`${BACKEND_API}/${currentProject?.location.background}`}
+          alt="Background Pattern"
+          className="object-cover w-full h-full bg-fixed"
+        />
       </motion.div>
       <MaxWidthWrapper className="flex relative z-40 flex-col gap-5">
-        <Header view={false} />
+        <Header title={`${currentProject?.title} Location`} desc={currentProject?.location.content} view={false} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-5">
           <div className="space-y-8">
             <div className="grid grid-cols-2 gap-4">
-              {locations.map((loc, index) => (
+              {currentProject?.location.numbers.map((loc, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -59,13 +66,14 @@ const Location = () => {
                   transition={{ delay: index * 0.1 }}
                   onClick={() => setSelectedLocation(loc)} // Update selected location on click
                   className={`border ${
-                    selectedLocation.label === loc.label ? "border-main" : "border-main/40"
+                    selectedLocation._id === loc._id ? "border-main" : "border-main/40"
                   } rounded-lg p-6 hover:border-main transition-colors cursor-pointer`}
                 >
-                  <div className="flex flex-col items-center justify-center text-center">
-                    <loc.icon className="w-8 h-8 mb-4 text-main" />
-                    <div className="text-3xl font-bold mb-1 special-font">{loc.time} Min</div>
-                    <div className="text-sm text-gray-400">{loc.label}</div>
+                  <div className="flex flex-col  items-center justify-center text-center">
+                    <div className="text-3xl  text-main font-bold mb-1 special-font">
+                      {loc.number} <span className="poppins">{loc.prefix}</span>
+                    </div>
+                    <div className="text-sm text-gray-400">{loc.title}</div>
                   </div>
                 </motion.div>
               ))}
@@ -73,10 +81,12 @@ const Location = () => {
           </div>
 
           <div className="relative">
-            <motion.img
-              key={selectedLocation.image} // Force re-render on image change
-              src={selectedLocation.image}
-              alt={`${selectedLocation.label} Map`}
+            <motion.video
+              key={selectedLocation?.video} // Force re-render on video change
+              src={`${BACKEND_API}/${selectedLocation?.video}`}
+              autoPlay
+              muted
+              loop
               className="rounded-lg w-full h-full max-h-80 object-cover"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

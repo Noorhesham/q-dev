@@ -2,13 +2,26 @@
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { HomeButton, NextButton, PrevButton } from "./PrevNextButtons";
-//page name
-const projectTabs = ["about", "location", "facilities", "masterplan", "videos", "images"];
+import { useProject } from "@/context/ProjectContext";
 
 export function NavigationControls() {
   const navigate = useNavigate();
   const location = useLocation();
   const { placeId, projectId } = useParams();
+  const { currentProject } = useProject();
+
+  const getAvailableTabs = () => {
+    if (!currentProject) return [];
+    const tabs = ["about"];
+
+    if (currentProject.location?.content) tabs.push("location");
+    if (currentProject.facilities?.facilities?.length > 0) tabs.push("facilities");
+    if (currentProject.master_plan?.plans?.length > 0) tabs.push("masterplan");
+    if (currentProject.videos?.length > 0) tabs.push("videos");
+    if (currentProject.lightImages?.length > 0 || currentProject.darkImages?.length > 0) tabs.push("images");
+
+    return tabs;
+  };
 
   // Determine current position in navigation flow
   const getCurrentPosition = () => {
@@ -18,15 +31,14 @@ export function NavigationControls() {
     if (path === `/${placeId}/projects`) return "projects";
     if (path === `/${placeId}/${projectId}/video`) return "video";
     if (path === `/${placeId}/${projectId}`) return "defaultPath";
-    if (path.includes(`/${placeId}/${projectId}`)) {
-      const currentTab = projectTabs.find((tab) => path.endsWith(tab));
-      return currentTab || ""; // Default to "about" instead of "location"
-    }
-    return "places";
+
+    const availableTabs = getAvailableTabs();
+    const currentTab = availableTabs.find((tab) => path.endsWith(tab));
+    return currentTab || "defaultPath";
   };
 
   const position = getCurrentPosition();
-  const video = true;
+  const availableTabs = getAvailableTabs();
 
   const goNext = () => {
     if (position === "places") {
@@ -34,60 +46,51 @@ export function NavigationControls() {
     } else if (position === "placeDetails") {
       navigate(`/${placeId}/projects`);
     } else if (position === "projects") {
-      navigate(`/${placeId}/${projectId}/about`); // Changed to navigate to "about" first
-    }
-    if (position === "video") navigate(`/${placeId}/${projectId}`);
-    else {
-      const currentTabIndex = projectTabs.indexOf(position);
-      if (currentTabIndex < projectTabs.length - 1) {
-        navigate(`/${placeId}/${projectId}/${projectTabs[currentTabIndex + 1]}`);
-      } else navigate("/places");
-    }
-  };
-  const goPrev = () => {
-    if (position === "projects") {
-      navigate(`/${placeId}`);
-    } else if (position === "about") {
+      navigate(`/${placeId}/${projectId}/about`);
+    } else if (position === "video") {
       navigate(`/${placeId}/${projectId}`);
-    } else if (position === "placeDetails") {
-      navigate("/places");
-    }
-    if (position === "video") navigate(`/${placeId}/projects`);
-    else {
-      const currentTabIndex = projectTabs.indexOf(position);
-      console.log(currentTabIndex);
-      if (currentTabIndex > 0) {
-        navigate(`/${placeId}/${projectId}/${projectTabs[currentTabIndex - 1]}`);
+    } else {
+      const currentTabIndex = availableTabs.indexOf(position);
+      if (currentTabIndex < availableTabs.length - 1) {
+        navigate(`/${placeId}/${projectId}/${availableTabs[currentTabIndex + 1]}`);
       } else {
-        video ? navigate(`/${placeId}/${projectId}/video`) : navigate(`/${placeId}/projects`);
+        navigate("/places");
       }
     }
   };
-  const islast = projectTabs.indexOf(position) === projectTabs.length - 1;
+
+  const goPrev = () => {
+    if (position === "projects") {
+      navigate(`/${placeId}`);
+    } else if (position === "placeDetails") {
+      navigate("/places");
+    } else if (position === "video") {
+      navigate(`/${placeId}/projects`);
+    } else {
+      const currentTabIndex = availableTabs.indexOf(position);
+      if (currentTabIndex > 0) {
+        navigate(`/${placeId}/${projectId}/${availableTabs[currentTabIndex - 1]}`);
+      } else {
+        navigate(`/${placeId}/projects`);
+      }
+    }
+  };
+
+  const isLast = availableTabs.indexOf(position) === availableTabs.length - 1;
+
   const goHome = () => {
-    if (islast) navigate(`/${placeId}/projects`);
+    if (isLast) navigate(`/${placeId}/projects`);
     if (position === "video" || position === "defaultPath") navigate("/");
     else navigate(`/${placeId}/${projectId}`);
-  };
-
-  // Determine if buttons should be disabled
-  const isNextDisabled = () => {
-    if (position === "places" && !placeId) return true;
-    return false;
-  };
-
-  const isPrevDisabled = () => {
-    return position === "places";
   };
 
   return (
     <MaxWidthWrapper className="z-50 w-full bottom-0 left-28 absolute">
       <div className="special-font flex items-center gap-4 z-50">
-        <PrevButton disabled={isPrevDisabled()} onClick={goPrev} />
-        <NextButton disabled={isNextDisabled()} onClick={goNext} />
+        <PrevButton onClick={goPrev} />
+        <NextButton onClick={goNext} />
       </div>
-
-      <HomeButton exit={position !== "video" && position !== `defaultPath`} onClick={goHome} />
+      <HomeButton exit={position !== "video" && position !== "defaultPath"} onClick={goHome} />
     </MaxWidthWrapper>
   );
 }

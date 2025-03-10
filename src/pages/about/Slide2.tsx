@@ -5,8 +5,10 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import ItemCardGrid from "@/components/ItemCardGrid";
 import { useEffect } from "react";
 import { useNav } from "@/context/NavContext";
+import { BACKEND_API } from "@/constants";
 
-const Slide2 = () => {
+const Slide2 = ({ data }: { data?: any }) => {
+  console.log(data);
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -28,39 +30,24 @@ const Slide2 = () => {
   }, []);
   return (
     <div className="relative min-h-screen  overflow-hidden">
-      {/* Background Wave Pattern */}
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
       <div className="absolute inset-0  ">
-        <img src="/Rectangle 3 (1).png" alt="Background Pattern" className="object-cover bg-fixed" />
+        <img src={`${BACKEND_API}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
       </div>
 
       <MaxWidthWrapper className="relative pt-20 z-40">
         <motion.div className=" flex flex-col gap-1" variants={container} initial="hidden" animate="show">
-          {/* Vision Section */}
-          <ItemCardGrid
-            reverse
-            item={item}
-            desc="To become The Leading Innovator Brand in the Accessible Intermediate Luxury Real Estate category in the region. Q Developments’ vision to be 'reaching the beyond' is not just a phrase we use on marketing literature. It defines our company culture. It's an ambition, something we strive towards. How we achieve this ambition is very important."
-            image="/Rectangle 13.png"
-            title="Our Vision"
-          />
-
-          {/* Mission Section */}
-          <ItemCardGrid
-            item={item}
-            desc="To build real homes around the best locations, and serve them with modern design. We create the best value within the Accessible Intermediate Luxury Category, mastering the delicate balance between: Excellent Customer Service and Experience - Continuous Innovations - Effective Quality - Optimal Price."
-            image="/Rectangle 14.png"
-            title="Our Mission"
-          />
-
-          {/* Values Section */}
-          <ItemCardGrid
-            reverse
-            item={item}
-            desc="OUR VALUES help us achieve our vision in an ethical and consistent way. These values apply to every aspect of our work. When you represent our Company, you work with these values in mind. They support our strategic objectives and underpin the day-to-day activities of our business."
-            image="/Rectangle 15.png"
-            title="Our Values"
-          />
+          {data.items.map((InnerItem, i) => (
+            <div>
+              <ItemCardGrid
+                reverse={i % 2 === 0}
+                item={item}
+                desc={InnerItem.description}
+                image={`${BACKEND_API}/${InnerItem.photo}`}
+                title={data.title}
+              />
+            </div>
+          ))}
         </motion.div>
       </MaxWidthWrapper>
     </div>

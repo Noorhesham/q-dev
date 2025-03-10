@@ -2,10 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 const Header = ({
+  title,
   col,
   className,
   paraClassName,
   children,
+  desc,
 }: {
   title: string;
   view?: boolean;
@@ -24,7 +26,7 @@ const Header = ({
             animate={{ opacity: 1, y: 0 }}
             className={` ${className} !w-fit text-nowrap text-5xl special-font font-special`}
           >
-            North Coast
+            {title}
           </motion.h1>
           {children}
         </div>
@@ -32,17 +34,9 @@ const Header = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className={` ${paraClassName} max-w-full text-sm space-y-4 text-cream/80`}
+          className={` ${paraClassName} max-w-full w-full text-sm space-y-4 text-cream/80`}
         >
-          <p>
-            Q Developments was established in 2022 to engrave its signature in the Egyptian market for a lifetime by
-            introducing quality homes to the Egyptian society in perfectly planned projects that provide integrated
-            services.
-          </p>
-          <p>
-            Q Developments strives to provide affordable quality homes, exceptional experience & highest quality service
-            to be presented to the Egyptian culture with a good return on investment.
-          </p>{" "}
+          <div dangerouslySetInnerHTML={{ __html: desc }} />
         </motion.div>
       </div>
     </div>

@@ -5,10 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { ChevronLeft } from "lucide-react";
 import Header from "@/components/Header";
+import { useProject } from "@/context/ProjectContext";
+import { BACKEND_API } from "@/constants";
 
 export default function MasterPlan({}) {
   const [showDetails, setShowDetails] = useState(false);
+  const { currentProject } = useProject();
 
+  if (!currentProject) return null;
   return (
     <div className="relative min-h-screen flex justify-center items-center bg-main2">
       {" "}
@@ -20,7 +24,11 @@ export default function MasterPlan({}) {
         transition={{ duration: 1.5 }}
         viewport={{ once: true }}
       >
-        <img src="/Rectangle 3 (7).png" alt="Background Pattern" className="object-cover w-full h-full bg-fixed" />
+        <img
+          src={`${BACKEND_API}/${currentProject.master_plan.background}`}
+          alt="Background Pattern"
+          className="object-cover w-full h-full bg-fixed"
+        />
       </motion.div>
       <MaxWidthWrapper className="relative z-10">
         <AnimatePresence mode="wait">
@@ -32,7 +40,12 @@ export default function MasterPlan({}) {
               exit={{ opacity: 0 }}
               className=" grid gap-5 grid-cols-2"
             >
-              <Header view={false} col />
+              <Header
+                title={`${currentProject.title} Master Plan`}
+                desc={`${currentProject.master_plan.content}`}
+                view={false}
+                col
+              />
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -41,7 +54,11 @@ export default function MasterPlan({}) {
                 className="aspect-[2/1] rounded-3xl overflow-hidden cursor-pointer"
                 onClick={() => setShowDetails(true)}
               >
-                <img src="/Rectangle 8.png" alt="Master Plan" className="w-full h-full object-cover" />
+                <img
+                  src={`${BACKEND_API}/${currentProject.master_plan.photo}`}
+                  alt="Master Plan"
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
             </motion.div>
           ) : (
@@ -59,41 +76,27 @@ export default function MasterPlan({}) {
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
-                <h1 className="text-2xl text-white">Floor Plans</h1>
+                {/* <h1 className="text-2xl text-white">Floor Plans</h1> */}
               </div>
 
               <div className="grid grid-cols-2 gap-8">
                 <div className="overflow-y-scroll max-h-96 flex flex-col  w-full gap-3 items-start">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className=" w-full space-y-4"
-                  >
-                    <h2 className="text-white text-xl">Ground Floor</h2>
-                    <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
-                      <img
-                        src="/23b39f_f4192ed1dbe648e4b7acb441498ee674_mv2-1024x576 1 (2).png"
-                        alt="Ground Floor Plan"
-                        className="w-full h-full  object-cover"
-                      />
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="space-y-4  w-full"
-                  >
-                    <h2 className="text-white text-xl">First Floor</h2>
-                    <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
-                      <img
-                        src="/23b39f_f4192ed1dbe648e4b7acb441498ee674_mv2-1024x576 1 (2).png"
-                        alt="First Floor Plan"
-                        className="w-full h-full  object-cover"
-                      />
-                    </div>
-                  </motion.div>
+                  {currentProject.master_plan.plans.map((plan) => (
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="space-y-4  w-full"
+                    >
+                      <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
+                        <img
+                          src={`${BACKEND_API}/${plan}`}
+                          alt="First Floor Plan"
+                          className="w-full h-full  object-contain"
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>{" "}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

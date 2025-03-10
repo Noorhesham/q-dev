@@ -10,6 +10,8 @@ import "swiper/css/navigation";
 import Header from "@/components/Header";
 import ModelCustom from "@/components/ModelCustom";
 import { Dialog, DialogTrigger, DialogContent, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { useProject } from "@/context/ProjectContext";
+import { BACKEND_API } from "@/constants";
 
 const videos = [
   {
@@ -35,6 +37,7 @@ const videos = [
 ];
 
 export default function Videos() {
+  const { currentProject } = useProject();
   return (
     <div className="relative min-h-screen ">
       {" "}
@@ -50,7 +53,7 @@ export default function Videos() {
       <MaxWidthWrapper className="relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-16">
           <div className=" self-center mx-auto my-5 w-fit flex flex-col !items-center text-center">
-            <Header className="items-center !mx-auto text-center" col />
+            <Header title={`${currentProject?.title} Videos`} className="items-center !mx-auto text-center" col />
           </div>
 
           <motion.div
@@ -74,12 +77,12 @@ export default function Videos() {
               }}
               className="w-full"
             >
-              {videos.map((video) => (
+              {currentProject.videos.map((video) => (
                 <SwiperSlide key={video.id}>
                   <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden group cursor-pointer">
-                    <img
-                      src={video.thumbnail || "/placeholder.svg"}
-                      alt={`Video ${video.id}`}
+                    <video
+                      muted
+                      src={`${BACKEND_API}/${video}` || "/placeholder.svg"}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
@@ -94,7 +97,7 @@ export default function Videos() {
                           <div className=" w-full  ">
                             <video
                               controls
-                              src="/JoJo with Dragon Ball Sound Effects Test.mp4"
+                              src={`${BACKEND_API}/${video}` || "/placeholder.svg"}
                               className="w-full h-full inset-0   absolute object-cover"
                             ></video>
                           </div>

@@ -10,6 +10,8 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import ModelCustom from "@/components/ModelCustom";
 import { Switch } from "@/components/ui/switch";
+import { useProject } from "@/context/ProjectContext";
+import { BACKEND_API } from "@/constants";
 
 const lightImages = [
   { id: 1, thumbnail: "/Rectangle 3 (1).png" },
@@ -27,6 +29,8 @@ const darkImages = [
 
 export default function Images() {
   const [isLightMode, setIsLightMode] = useState(true);
+  const { currentProject } = useProject();
+  const images = isLightMode ? currentProject?.lightImages : currentProject?.darkImages;
   return (
     <div className="relative min-h-screen ">
       {" "}
@@ -42,7 +46,7 @@ export default function Images() {
       <MaxWidthWrapper className="relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-16 flex flex-col">
           <div className="self-center mx-auto my-5 w-fit flex flex-col items-center text-center">
-            <Header className="items-center !mx-auto text-center" col />
+            <Header title={`${currentProject?.title} Renders`} className="items-center !mx-auto text-center" col />
           </div>
           <div className="  z-10 flex special-font items-center mx-auto space-x-4">
             <span className="text-white">Light Renders</span>
@@ -56,18 +60,17 @@ export default function Images() {
               spaceBetween={24}
               slidesPerView={3}
               loop={true}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              autoplay={{ delay: 1000 }}
               navigation={{ prevEl: ".swiper-button-prev", nextEl: ".swiper-button-next" }}
               className="w-full mt-6"
             >
-              {(isLightMode ? lightImages : darkImages).map((image) => (
-                <SwiperSlide key={image.id}>
+              {images.map((image) => (
+                <SwiperSlide key={image}>
                   <ModelCustom
                     btn={
                       <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden group cursor-pointer">
                         <img
-                          src={image.thumbnail || "/placeholder.svg"}
-                          alt={`Image ${image.id}`}
+                          src={`${BACKEND_API}/${image}` || "/placeholder.svg"}
                           className="w-full h-full object-cover transition-transform group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
@@ -76,8 +79,7 @@ export default function Images() {
                     content={
                       <div className="  w-screen h-screen">
                         <img
-                          src={image.thumbnail || "/placeholder.svg"}
-                          alt={`Image ${image.id}`}
+                          src={`${BACKEND_API}/${image}` || "/placeholder.svg"}
                           className="w-full h-full absolute inset-0 object-cover transition-transform group-hover:scale-105"
                         />
                       </div>
