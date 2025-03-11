@@ -44,7 +44,7 @@ const Slide2 = ({ data }: { data?: any }) => {
                 item={item}
                 desc={InnerItem.description}
                 image={`${BACKEND_API}/${InnerItem.photo}`}
-                title={data.title}
+                title={InnerItem.title}
               />
             </div>
           ))}

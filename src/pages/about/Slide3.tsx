@@ -23,7 +23,7 @@ const Slide3 = ({ data }: { data?: any }) => {
       <MaxWidthWrapper className="text-white z-30 relative container mx-auto">
         <div className="flex items-center justify-between py-32">
           <div className="max-w-2xl">
-            <div dangerouslySetInnerHTML={{ __html: data?.content }} />
+            <div className=" !list-disc" dangerouslySetInnerHTML={{ __html: data?.content }} />
           </div>
 
           <div className=" relative">

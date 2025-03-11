@@ -3,7 +3,9 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
-
+ul{
+  list-style-type: disc;
+}
 @custom-variant dark (&:is(.dark *));
 @theme {
   --color-main: #ddd7cb;

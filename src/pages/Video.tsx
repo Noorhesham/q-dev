@@ -4,18 +4,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const Video = () => {
-  const { currentProject } = useProject();
+  const { currentProject, projects, setCurrentProject } = useProject();
   const { placeId, projectId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If no project or no videos, redirect to project tabs
-    if (!currentProject || !currentProject.videos?.length) {
-      navigate(`/${placeId}/${projectId}`);
+    if (projectId && projects) {
+      const project = projects.find((p) => p._id === projectId);
+      if (project) {
+        setCurrentProject(project);
+        console.log(project)
+        if (!project?.video) navigate(`/${placeId}/${projectId}`);
+      }
     }
-  }, [currentProject, placeId, projectId, navigate]);
-
-  if (!currentProject || !currentProject.videos?.length) return null;
+  }, [projectId, projects]);
 
   return (
     <div>
@@ -25,7 +27,7 @@ const Video = () => {
           controls
           autoPlay
           muted
-          src={`${BACKEND_API}/${currentProject.videos[0]}`}
+          src={`${BACKEND_API}/${currentProject?.video}`}
           className="w-full h-full inset-0 object-cover"
         />
       </div>

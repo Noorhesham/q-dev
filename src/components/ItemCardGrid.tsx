@@ -17,7 +17,7 @@ const ItemCardGrid: React.FC<ItemCardGridProps> = ({ item, title, desc, image, r
       </div>
       <div className="flex-1">
         <h2 className="text-4xl text-white mb-4 special-font">{title}</h2>
-        <p className="text-white/80 text-sm leading-relaxed mb-4">{desc}</p>
+        <p className="text-white/80 text-sm leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: desc }} />
       </div>
     </motion.div>
   );
