@@ -31,7 +31,7 @@ export default function Projects() {
           className="object-cover z-10 bg-fixed"
         />
       </div>
-      <MaxWidthWrapper className="relative flex flex-col gap-8 mt-24 z-10">
+      <MaxWidthWrapper className="relative justify-center !h-full flex flex-col gap-8 mt-24 z-10">
         <Header
           title={currentPlace.name}
           desc={currentPlace.description}
@@ -39,7 +39,7 @@ export default function Projects() {
           paraClassName="!max-w-full"
           view={false}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+        <div className="grid grid-cols-1 mt-5 h-full md:grid-cols-2 gap-8 ">
           {projects.map((project, index) => (
             <Link to={`/${placeId}/${project._id}/video`} key={project._id}>
               <motion.div

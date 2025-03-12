@@ -53,7 +53,7 @@ const Location = () => {
           className="object-cover w-full h-full bg-fixed"
         />
       </motion.div>
-      <MaxWidthWrapper className="flex relative z-40 flex-col gap-5">
+      <MaxWidthWrapper className="flex relative mt-5 z-40 flex-col gap-5">
         <Header title={`${currentProject?.title} Location`} desc={currentProject?.location.content} view={false} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-5">
           <div className="space-y-8">
