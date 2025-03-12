@@ -6,18 +6,22 @@ import { HomeButton, NextButton, PrevButton } from "@/components/PrevNextButtons
 import { useProject } from "@/context/ProjectContext";
 import { useEffect } from "react";
 import { BACKEND_API } from "@/constants";
+import { useNav } from "@/context/NavContext";
 
 export default function PlaceDetail() {
   const navigate = useNavigate();
   const { placeId } = useParams();
   const { currentPlace, fetchPlaceDetails } = useProject();
-
+  const { setTitle } = useNav();
   useEffect(() => {
     if (placeId) {
       fetchPlaceDetails(placeId);
     }
   }, [placeId]);
 
+  useEffect(() => {
+    if (currentPlace) setTitle(currentPlace.name);
+  }, [currentPlace]);
   if (!currentPlace) return null;
   console.log(currentPlace);
   return (

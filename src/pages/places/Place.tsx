@@ -7,22 +7,26 @@ import Label from "@/components/Label";
 import { useProject } from "@/context/ProjectContext";
 import { BACKEND_API } from "@/constants";
 import { useEffect } from "react";
+import { useNav } from "@/context/NavContext";
 
 export default function Places() {
   const navigate = useNavigate();
   const { places, isLoading } = useProject();
+  const { setTitle } = useNav();
 
   if (isLoading) return null;
   if (!places?.length) return null;
-
+  useEffect(() => {
+    setTitle("Places");
+  }, []);
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-main2 overflow-hidden">
       {" "}
       <div className="absolute inset-0 mix-blend-multiply ">
-        <img 
-          src={`${BACKEND_API}/${places[0].background}`} 
-          alt="Background Pattern" 
-          className="object-cover z-10 bg-fixed" 
+        <img
+          src={`${BACKEND_API}/${places[0].background}`}
+          alt="Background Pattern"
+          className="object-cover z-10 bg-fixed"
         />
       </div>
       <div className=" mix-blend-multiply absolute left-0 top-0 z-10 w-96">
