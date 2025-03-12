@@ -29,11 +29,11 @@ export default function Places() {
         <AnimatedSvgQ />
       </div>
       <MaxWidthWrapper className="  relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+        <div className="flex items-center   justify-center gap-8 mt-16">
           {places.map((place, index) => (
             <Link to={`/${place._id}`} key={place._id}>
               <motion.div
-                className="group relative aspect-square  z-[99] rounded-[32px] overflow-hidden"
+                className="group relative aspect-square w-96  z-[99] rounded-[32px] overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}

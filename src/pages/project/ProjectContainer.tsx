@@ -39,11 +39,11 @@ export default function Projects() {
           paraClassName="!max-w-full"
           view={false}
         />
-        <div className="grid grid-cols-1 mt-5 h-full md:grid-cols-2 gap-8 ">
+        <div className="flex items-center justify-center mt-5 h-full  gap-8 ">
           {projects.map((project, index) => (
             <Link to={`/${placeId}/${project._id}/video`} key={project._id}>
               <motion.div
-                className="group relative aspect-video rounded-[32px] overflow-hidden"
+                className="group relative aspect-video w-full h-80 rounded-[32px] overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
