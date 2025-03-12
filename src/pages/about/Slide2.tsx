@@ -43,7 +43,7 @@ const Slide2 = ({ data }: { data?: any }) => {
                 reverse={i % 2 === 0}
                 item={item}
                 desc={InnerItem.description}
-                image={`${BACKEND_API}/${InnerItem.photo}`}
+                image={i === data.items.length - 1 ? "/our-values.webp" : `${BACKEND_API}/${InnerItem.photo}`}
                 title={InnerItem.title}
               />
             </div>
