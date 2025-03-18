@@ -26,7 +26,7 @@ export default function Places() {
         <img
           src={`${BACKEND_API}/${places[0].background}`}
           alt="Background Pattern"
-          className="object-cover z-10 bg-fixed"
+          className="object-cover w-full z-10 bg-fixed"
         />
       </div>
       <div className=" mix-blend-multiply absolute left-0 top-0 z-10 w-96">

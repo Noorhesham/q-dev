@@ -28,7 +28,7 @@ export default function Projects() {
         <img
           src={`${BACKEND_API}/${currentPlace.background}`}
           alt="Background Pattern"
-          className="object-cover z-10 bg-fixed"
+          className="object-cover w-full z-10 bg-fixed"
         />
       </div>
       <MaxWidthWrapper className="relative justify-center !h-full flex flex-col gap-8 mt-24 z-10">

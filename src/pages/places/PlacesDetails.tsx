@@ -32,42 +32,45 @@ export default function PlaceDetail() {
         className="object-cover w-full absolute inset-0 h-full"
         alt=""
       />
-      <MaxWidthWrapper className="relative   z-20 text-white">
-        <div className="flex !h-full flex-col gap-12 mt-20">
-          <Header
-            title={currentPlace.name}
-            desc={currentPlace.description}
-            className="gap-10"
-            paraClassName="!max-w-full"
-            view={false}
-          />
-          <div className="relative    mt-20">
-            {" "}
-            <div className=" h-full">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="relative w-full mt-auto h-80 rounded-[32px] overflow-hidden"
-              >
-                <div className="absolute inset-0">
-                  <img
-                    src={`${BACKEND_API}/${currentPlace.photo}`}
-                    alt={currentPlace.name}
-                    className="w-full h-full object-cover"
-                  />
+      <MaxWidthWrapper className="relative flex justify-center  h-full  z-20 text-white">
+        <div className="flex justify-center">
+          {" "}
+          <div className="flex !h-full flex-col gap-12 mt-20">
+            <Header
+              title={currentPlace.name}
+              desc={currentPlace.description}
+              className="gap-10"
+              paraClassName="!max-w-full"
+              view={false}
+            />
+            <div className=" absolute bottom-10 w-full     ">
+              {" "}
+              <div className="">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="relative w-full mt-auto h-80 rounded-[32px] overflow-hidden"
+                >
+                  <div className="absolute inset-0">
+                    <img
+                      src={`${BACKEND_API}/${currentPlace.photo}`}
+                      alt={currentPlace.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </motion.div>
+                <div className="z-50 relative mt-auto w-full">
+                  <div className="special-font   flex items-center gap-4 z-50">
+                    <PrevButton onClick={() => navigate(`/places`)} />
+                    <NextButton onClick={() => navigate(`/${placeId}/projects`)} />
+                  </div>
+                  <HomeButton onClick={() => navigate("/")} />
                 </div>
-              </motion.div>
-            </div>
-            <div className="z-50 relative w-full">
-              <div className="special-font absolute -bottom-20 left-0 flex items-center gap-4 z-50">
-                <PrevButton onClick={() => navigate(`/places`)} />
-                <NextButton onClick={() => navigate(`/${placeId}/projects`)} />
               </div>
-              <HomeButton onClick={() => navigate("/")} />
             </div>
-          </div>
-        </div>{" "}
+          </div>{" "}
+        </div>
       </MaxWidthWrapper>
     </div>
   );
