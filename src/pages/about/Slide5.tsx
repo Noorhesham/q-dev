@@ -67,6 +67,3 @@ const Slide5 = ({ data, setSelectedCompany }: Slide5Props) => {
 };
 
 export default Slide5;
-
-
-   

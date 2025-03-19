@@ -1,8 +1,19 @@
 import { ArrowLeft, ArrowRight, Home } from "lucide-react";
 import { ButtonCustom } from "./ButtonCustom";
 import { Button } from "./ui/button";
+import { useEffect } from "react";
 
 export const PrevButton = ({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) => {
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" && !disabled) onClick();
+    });
+    return () => {
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft" && !disabled) onClick();
+      });
+    };
+  }, [disabled, onClick]);
   return (
     <ButtonCustom
       variant="outline"
@@ -19,6 +30,16 @@ export const PrevButton = ({ onClick, disabled }: { onClick: () => void; disable
   );
 };
 export const NextButton = ({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) => {
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" && !disabled) onClick();
+    });
+    return () => {
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" && !disabled) onClick();
+      });
+    };
+  }, [disabled, onClick]);
   return (
     <ButtonCustom
       variant="outline"
