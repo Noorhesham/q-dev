@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useNav } from "@/context/NavContext";
 import { BACKEND_API } from "@/constants";
 import { useAbout } from "@/context/AboutContext";
+import { HomeButton, NextButton, PrevButton } from "@/components/PrevNextButtons";
+import { useNavigate } from "react-router-dom";
 
 interface Company {
   _id: string;
@@ -19,9 +21,9 @@ interface Slide6Props {
   setSelectedCompany: (company: Company) => void;
 }
 
-const Slide6 = ({ selectedCompany, setSelectedCompany }: Slide6Props) => {
+const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6Props) => {
   const { data } = useAbout();
-  const { setTitle } = useNav();
+  const { setTitle, companiesLength } = useNav();
 
   useEffect(() => {
     // Set initial company if none selected
@@ -38,6 +40,7 @@ const Slide6 = ({ selectedCompany, setSelectedCompany }: Slide6Props) => {
     const companiesData = data?.find((d) => d.type === "companies");
     setTitle(companiesData?.pageTitle || "Our Partners");
   }, [data, setTitle]);
+  const navigate = useNavigate();
 
   if (!selectedCompany) return null;
 
@@ -79,6 +82,29 @@ const Slide6 = ({ selectedCompany, setSelectedCompany }: Slide6Props) => {
             className="text-base"
             dangerouslySetInnerHTML={{ __html: selectedCompany.content }}
           />
+        </div>
+      </MaxWidthWrapper>{" "}
+      <MaxWidthWrapper className="relative mt-auto">
+        <div className="z-50 relative w-full">
+          <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
+            <PrevButton onClick={() => setCurrentSlide(5)} />
+            <NextButton
+              onClick={() => {
+                const companiesData = data?.find((d) => d.type === "companies")?.companies || [];
+                if (companiesData.length > 1) {
+                  const currentIndex = companiesData.findIndex((c) => c._id === selectedCompany._id);
+                  if (currentIndex === companiesData.length - 1) {
+                    navigate("/"); // Navigate to home if it's the last company
+                  } else {
+                    setSelectedCompany(companiesData[currentIndex + 1]); // Move to the next company
+                  }
+                } else {
+                  navigate("/");
+                }
+              }}
+            />
+          </div>
+          <HomeButton onClick={() => navigate("/")} />
         </div>
       </MaxWidthWrapper>
     </div>

@@ -24,10 +24,11 @@ interface Slide5Props {
 }
 
 const Slide5 = ({ data, setSelectedCompany }: Slide5Props) => {
-  const { setTitle } = useNav();
+  const { setTitle, setCompaniesLength } = useNav();
   console.log(data);
   useEffect(() => {
     setTitle(data?.pageTitle || "Our Partners");
+    setCompaniesLength(data?.companies);
   }, [data?.pageTitle]);
 
   return (

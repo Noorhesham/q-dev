@@ -67,16 +67,19 @@ const AboutUs = () => {
                 data: data.find((item) => item.type === slide.id),
                 setSelectedCompany: handleCompanySelect,
                 selectedCompany: selectedCompany,
+                setCurrentSlide,
               })}
-              <MaxWidthWrapper className="relative mt-auto">
-                <div className="z-50 relative w-full">
-                  <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
-                    <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
-                    <NextButton onClick={() => (currentSlide === slides.length - 1 ? navigate("/") : nextSlide())} />
+              {currentSlide !== 6 && (
+                <MaxWidthWrapper className="relative mt-auto">
+                  <div className="z-50 relative w-full">
+                    <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
+                      <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
+                      <NextButton onClick={() => (currentSlide === slides.length - 1 ? navigate("/") : nextSlide())} />
+                    </div>
+                    <HomeButton onClick={() => navigate("/")} />
                   </div>
-                  <HomeButton onClick={() => navigate("/")} />
-                </div>
-              </MaxWidthWrapper>
+                </MaxWidthWrapper>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

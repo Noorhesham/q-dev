@@ -7,6 +7,7 @@ import { ChevronLeft } from "lucide-react";
 import Header from "@/components/Header";
 import { useProject } from "@/context/ProjectContext";
 import { BACKEND_API } from "@/constants";
+import ModelCustom from "@/components/ModelCustom";
 
 export default function MasterPlan({}) {
   const [showDetails, setShowDetails] = useState(false);
@@ -82,20 +83,31 @@ export default function MasterPlan({}) {
               <div className="grid grid-cols-2 gap-8">
                 <div className="overflow-y-scroll max-h-96 flex flex-col  w-full gap-3 items-start">
                   {currentProject.master_plan.plans.map((plan) => (
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="space-y-4  w-full"
-                    >
-                      <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
+                    <ModelCustom
+                      btn={
+                        <motion.div
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className="space-y-4  w-full"
+                        >
+                          <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
+                            <img
+                              src={`${BACKEND_API}/${plan}`}
+                              alt="First Floor Plan"
+                              className="w-full h-full  object-contain"
+                            />
+                          </div>
+                        </motion.div>
+                      }
+                      content={
                         <img
                           src={`${BACKEND_API}/${plan}`}
                           alt="First Floor Plan"
                           className="w-full h-full  object-contain"
                         />
-                      </div>
-                    </motion.div>
+                      }
+                    />
                   ))}
                 </div>{" "}
                 <motion.div
