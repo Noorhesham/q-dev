@@ -85,7 +85,7 @@ const Start = () => {
               {firstRow.map((tab) => (
                 <motion.div key={tab.id} variants={item}>
                   <Link to={`/${placeId}/${projectId}/${tab.id}`}>
-                    <SpcialButton className="!text-base !font-bold special-font">{tab.label}</SpcialButton>
+                    <SpcialButton className="!text-base !font-bold special-font2">{tab.label}</SpcialButton>
                   </Link>
                 </motion.div>
               ))}
@@ -96,7 +96,7 @@ const Start = () => {
               {secondRow.map((tab) => (
                 <motion.div key={tab.id} variants={item}>
                   <Link to={`/${placeId}/${projectId}/${tab.id}`}>
-                    <SpcialButton className="!text-base !font-bold special-font">{tab.label}</SpcialButton>
+                    <SpcialButton className="!text-base !font-bold special-font2">{tab.label}</SpcialButton>
                   </Link>
                 </motion.div>
               ))}

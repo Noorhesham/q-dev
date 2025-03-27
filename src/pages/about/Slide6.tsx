@@ -43,7 +43,7 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
   const navigate = useNavigate();
 
   if (!selectedCompany) return null;
-
+  console.log(selectedCompany);
   return (
     <div className="relative min-h-screen overflow-hidden">
       <motion.div
@@ -57,7 +57,7 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
       <div className="absolute inset-0">
         <img src="/Rectangle 3 (5).png" alt="Background Pattern" className="object-cover z-10 bg-fixed" />
       </div>
-      <MaxWidthWrapper className="text-white z-30 relative container mx-auto">
+      <MaxWidthWrapper className="text-white gap-8 flex items-center justify-between z-30 relative container mx-auto">
         <div className="py-32 flex max-w-2xl flex-col gap-5 items-start">
           <motion.img
             initial={{ opacity: 0, y: 20 }}
@@ -67,6 +67,7 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
             className="object-left w-80"
             alt={selectedCompany.title}
           />
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,6 +83,14 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
             className="text-base"
             dangerouslySetInnerHTML={{ __html: selectedCompany.content }}
           />
+        </div>{" "}
+        <div className=" relative w-full z-50">
+          {/* <img
+          src={`${BACKEND_API}/${selectedCompany.sideImage}`}
+          className="object-left w-80"
+          alt={selectedCompany.title}
+        /> */}{" "}
+          <img src={`/Rectangle 3 (5).png`} className="object-left w-full h-auto rounded-2xl" alt={selectedCompany.title} />
         </div>
       </MaxWidthWrapper>{" "}
       <MaxWidthWrapper className="relative mt-auto">

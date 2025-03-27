@@ -47,8 +47,18 @@ export default function Places() {
                   alt={place.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-110"
                 />
-                <div className="absolute inset-0  " />
-                <Label text={place.name} />
+                <div className="absolute inset-0  " />{" "}
+                <div>
+                  <div className={` flex items-stretch  absolute bottom-6 left-0`}>
+                    <img src="/Vector (18).png" alt="Q" className="w-[42px]  h-auto" />
+                    <h2
+                      className="text-2xl bg-main2 h-full special-font2  px-10 py-2  rounded-r-2xl
+     text-white font-semibold"
+                    >
+                      {place.name}
+                    </h2>
+                  </div>
+                </div>
               </motion.div>
             </Link>
           ))}

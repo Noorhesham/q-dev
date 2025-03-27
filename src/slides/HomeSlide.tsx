@@ -37,14 +37,14 @@ export const HomeSlide = () => {
             <Link to={"/about"}>
               <SpcialButton>
                 <span>من نحن</span>
-                <span className="special-font">About us</span>
+                <span className="special-font2">About us</span>
               </SpcialButton>
             </Link>
 
             <Link to={"/places"}>
               <SpcialButton>
                 <span className=" font-cairo">مشارعينـــــــا</span>
-                <span className="special-font">Our Projects</span>
+                <span className="special-font2">Our Projects</span>
               </SpcialButton>
             </Link>
           </div>

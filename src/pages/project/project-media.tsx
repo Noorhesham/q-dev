@@ -48,7 +48,7 @@ export default function Images() {
           <div className="self-center mx-auto my-5 w-fit flex flex-col items-center text-center">
             <Header title={`${currentProject?.title} Renders`} className="items-center !mx-auto text-center" col />
           </div>
-          <div className="  z-10 flex special-font items-center mx-auto space-x-4">
+          <div className="  z-10 flex special-font2 items-center mx-auto space-x-4">
             <span className="text-white">Light Renders</span>
             <Switch checked={!isLightMode} onCheckedChange={() => setIsLightMode(!isLightMode)} />
             <span className="text-white">Dark Renders</span>

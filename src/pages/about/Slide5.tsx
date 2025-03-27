@@ -30,7 +30,7 @@ const Slide5 = ({ data, setSelectedCompany }: Slide5Props) => {
     setTitle(data?.pageTitle || "Our Partners");
     setCompaniesLength(data?.companies);
   }, [data?.pageTitle]);
-
+  
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>

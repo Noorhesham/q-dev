@@ -50,13 +50,13 @@ export default function PlaceDetail() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="relative w-full mt-auto h-80 rounded-[32px] overflow-hidden"
+                  className="relative w-full mt-auto h-96 rounded-[32px] overflow-hidden"
                 >
-                  <div className="absolute inset-0">
+                  <div className="absolute bottom-10 w-full inset-0">
                     <img
                       src={`${BACKEND_API}/${currentPlace.photo}`}
                       alt={currentPlace.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-center object-contain"
                     />
                   </div>
                 </motion.div>
