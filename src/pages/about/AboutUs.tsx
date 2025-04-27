@@ -37,8 +37,16 @@ const AboutUs = () => {
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
   const navigate = useNavigate();
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const nextSlide = () => {
+    if (currentSlide === slides.length - 1) {
+      navigate("/");
+    } else {
+      setCurrentSlide((prev) => prev + 1);
+    }
+  };
+
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const handleCompanySelect = (company: Company) => {
     setSelectedCompany(company);
@@ -48,42 +56,42 @@ const AboutUs = () => {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No data available.</p>;
 
+  const CurrentSlideComponent = slides[currentSlide].component;
+
   return (
     <div className={cn("relative overflow-hidden h-screen", currentSlide !== 5 && "bg-main2")}>
       <div className="mix-blend-multiply absolute left-0 top-0 z-30 w-96">
         <AnimatedSvgQ />
       </div>
-      {slides.map((slide, index) => (
-        <AnimatePresence key={slide.id}>
-          {index === currentSlide && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0"
-            >
-              {React.createElement(slide.component, {
-                data: data.find((item) => item.type === slide.id),
-                setSelectedCompany: handleCompanySelect,
-                selectedCompany: selectedCompany,
-                setCurrentSlide,
-              })}
-              {currentSlide !== 6 && (
-                <MaxWidthWrapper className="relative mt-auto">
-                  <div className="z-50 relative w-full">
-                    <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
-                      <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
-                      <NextButton onClick={() => (currentSlide === slides.length - 1 ? navigate("/") : nextSlide())} />
-                    </div>
-                    <HomeButton onClick={() => navigate("/")} />
-                  </div>
-                </MaxWidthWrapper>
-              )}
-            </motion.div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={slides[currentSlide].id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
+        >
+          <CurrentSlideComponent
+            data={data.find((item) => item.type === slides[currentSlide].id)}
+            setSelectedCompany={handleCompanySelect}
+            selectedCompany={selectedCompany}
+            setCurrentSlide={setCurrentSlide}
+          />
+          {currentSlide !== 6 && (
+            <MaxWidthWrapper className="relative mt-auto">
+              <div className="z-50 relative w-full">
+                <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
+                  <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
+                  <NextButton onClick={nextSlide} />
+                </div>
+                <HomeButton onClick={() => navigate("/")} />
+              </div>
+            </MaxWidthWrapper>
           )}
-        </AnimatePresence>
-      ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
