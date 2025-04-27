@@ -13,11 +13,11 @@ const Slide3 = ({ data }: { data?: any }) => {
     <div className="relative min-h-screen  overflow-hidden">
       {/* Background Wave Pattern */}{" "}
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
-      <div className="absolute inset-0 ">
+      <div className="absolute w-full inset-0 ">
         <img
           src={`${BACKEND_API}/${data.background}`}
           alt="Background Pattern"
-          className="object-cover z-10 bg-fixed"
+          className="object-cover  w-full  z-10 bg-fixed"
         />
       </div>
       <MaxWidthWrapper className="text-white z-30 relative container mx-auto">

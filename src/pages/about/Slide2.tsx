@@ -29,14 +29,14 @@ const Slide2 = ({ data }: { data?: any }) => {
     setTitle("Mission , Vision & Values");
   }, []);
   return (
-    <div className="relative min-h-screen  overflow-hidden">
+    <div className="relative min-h-screen  ">
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
       <div className="absolute inset-0  ">
         <img src={`${BACKEND_API}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
       </div>
 
-      <MaxWidthWrapper className="relative pt-20 z-40">
-        <motion.div className=" flex flex-col gap-1" variants={container} initial="hidden" animate="show">
+      <MaxWidthWrapper className="relative  pt-20 z-40">
+        <motion.div className=" flex flex-col gap-4" variants={container} initial="hidden" animate="show">
           {data.items.map((InnerItem, i) => (
             <div>
               <ItemCardGrid

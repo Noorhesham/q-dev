@@ -71,16 +71,16 @@ const AboutUs = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute inset-0"
+          className="absolute  overflow-y-scroll inset-0"
         >
-          <CurrentSlideComponent
+          <CurrentSlideComponent className=''
             data={data.find((item) => item.type === slides[currentSlide].id)}
             setSelectedCompany={handleCompanySelect}
             selectedCompany={selectedCompany}
             setCurrentSlide={setCurrentSlide}
           />
           {currentSlide !== 6 && (
-            <MaxWidthWrapper className="relative mt-auto">
+            <MaxWidthWrapper className="  fixed z-50 left-10 mt-auto">
               <div className="z-50 relative w-full">
                 <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
                   <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
