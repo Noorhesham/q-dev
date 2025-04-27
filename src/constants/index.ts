@@ -1,1 +1,1 @@
-export const BACKEND_API = "https://q-dev-backend.vercel.app";
+export const BACKEND_API = "https://d.qdevelopments-gp.com";
