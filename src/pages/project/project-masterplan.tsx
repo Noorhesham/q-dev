@@ -6,7 +6,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { ChevronLeft } from "lucide-react";
 import Header from "@/components/Header";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 import ModelCustom from "@/components/ModelCustom";
 
 export default function MasterPlan({}) {
@@ -26,7 +26,7 @@ export default function MasterPlan({}) {
         viewport={{ once: true }}
       >
         <img
-          src={`${BACKEND_API}/${currentProject.master_plan.background}`}
+          src={`${ImageUrl}/${currentProject.master_plan.background}`}
           alt="Background Pattern"
           className="object-cover w-full h-full bg-fixed"
         />
@@ -56,7 +56,7 @@ export default function MasterPlan({}) {
                 onClick={() => setShowDetails(true)}
               >
                 <img
-                  src={`${BACKEND_API}/${currentProject.master_plan.photo}`}
+                  src={`${ImageUrl}/${currentProject.master_plan.photo}`}
                   alt="Master Plan"
                   className="w-full h-full object-cover"
                 />
@@ -93,7 +93,7 @@ export default function MasterPlan({}) {
                         >
                           <div className=" h-64 w-full rounded-3xl overflow-hidden bg-white/10">
                             <img
-                              src={`${BACKEND_API}/${plan}`}
+                              src={`${ImageUrl}/${plan}`}
                               alt="First Floor Plan"
                               className="w-full h-full  object-contain"
                             />
@@ -102,7 +102,7 @@ export default function MasterPlan({}) {
                       }
                       content={
                         <img
-                          src={`${BACKEND_API}/${plan}`}
+                          src={`${ImageUrl}/${plan}`}
                           alt="First Floor Plan"
                           className="w-full h-full  object-contain"
                         />

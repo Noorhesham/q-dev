@@ -5,7 +5,7 @@ import AnimatedSvgQ from "@/components/SvgQ";
 import { HomeButton } from "@/components/PrevNextButtons";
 import Label from "@/components/Label";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 import { useEffect } from "react";
 import { useNav } from "@/context/NavContext";
 
@@ -24,7 +24,7 @@ export default function Places() {
       {" "}
       <div className="absolute inset-0 mix-blend-multiply ">
         <img
-          src={`${BACKEND_API}/${places[0].background}`}
+          src={`${ImageUrl}/${places[0].background}`}
           alt="Background Pattern"
           className="object-cover w-full z-10 bg-fixed"
         />
@@ -43,7 +43,7 @@ export default function Places() {
                 transition={{ delay: index * 0.1 }}
               >
                 <img
-                  src={`${BACKEND_API}/${place.background}`}
+                  src={`${ImageUrl}/${place.background}`}
                   alt={place.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-110"
                 />

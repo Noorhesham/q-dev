@@ -5,7 +5,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import Header from "@/components/Header";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 export default function Facilities() {
   const { currentProject } = useProject();
@@ -29,7 +29,7 @@ export default function Facilities() {
         transition={{ duration: 1.5 }}
       >
         <img
-          src={`${BACKEND_API}/${currentProject.lightImages[0]}`}
+          src={`${ImageUrl}/${currentProject.lightImages[0]}`}
           alt="Background Pattern"
           className="object-cover w-full h-full bg-fixed"
         />
@@ -63,7 +63,7 @@ export default function Facilities() {
               >
                 <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">
                   <img
-                    src={`${BACKEND_API}${facility.photo}`}
+                    src={`${ImageUrl}${facility.photo}`}
                     alt={facility.title}
                     className="w-6 h-6 object-contain"
                   />

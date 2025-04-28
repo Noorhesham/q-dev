@@ -2,7 +2,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { motion } from "framer-motion";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 export default function About() {
   const { currentProject } = useProject();
@@ -48,7 +48,7 @@ export default function About() {
         viewport={{ once: true }}
       >
         <img
-          src={`${BACKEND_API}/${currentProject.lightImages?.[0]}`}
+          src={`${ImageUrl}/${currentProject.lightImages?.[0]}`}
           alt="Background Pattern"
           className="object-cover w-full h-full bg-fixed"
         />

@@ -5,7 +5,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import ItemCardGrid from "@/components/ItemCardGrid";
 import { useEffect } from "react";
 import { useNav } from "@/context/NavContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 const Slide2 = ({ data }: { data?: any }) => {
   console.log(data);
@@ -32,7 +32,7 @@ const Slide2 = ({ data }: { data?: any }) => {
     <div className="relative min-h-screen  ">
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
       <div className="absolute inset-0  ">
-        <img src={`${BACKEND_API}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
+        <img src={`${ImageUrl}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
       </div>
 
       <MaxWidthWrapper className="relative  pt-20 z-40">
@@ -43,7 +43,7 @@ const Slide2 = ({ data }: { data?: any }) => {
                 reverse={i % 2 === 0}
                 item={item}
                 desc={InnerItem.description}
-                image={i === data.items.length - 1 ? "/our-values.webp" : `${BACKEND_API}/${InnerItem.photo}`}
+                image={`${ImageUrl}/${InnerItem.photo}`}
                 title={InnerItem.title}
               />
             </div>

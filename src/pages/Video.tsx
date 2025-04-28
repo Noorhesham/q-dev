@@ -1,4 +1,4 @@
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 import { useProject } from "@/context/ProjectContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -27,7 +27,7 @@ const Video = () => {
           controls
           autoPlay
           muted
-          src={`${BACKEND_API}/${currentProject?.video}`}
+          src={`${ImageUrl}/${currentProject?.video}`}
           className="w-full h-full inset-0 object-cover"
         />
       </div>

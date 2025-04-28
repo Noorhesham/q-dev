@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useNav } from "@/context/NavContext";
 import { useEffect } from "react";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 interface Company {
   _id: string;
@@ -36,7 +36,7 @@ const Slide5 = ({ data, setSelectedCompany }: Slide5Props) => {
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
       <div className="absolute !w-full !h-full inset-0">
         <img
-          src={`${BACKEND_API}/${data?.background}`}
+          src={`${ImageUrl}/${data?.background}`}
           alt="Background Pattern"
           className="object-cover w-full h-full z-10 bg-fixed"
         />
@@ -57,7 +57,7 @@ const Slide5 = ({ data, setSelectedCompany }: Slide5Props) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
               >
-                <img src={`${BACKEND_API}/${company.photo}`} alt={company.title} className="w-full h-auto" />
+                <img src={`${ImageUrl}/${company.photo}`} alt={company.title} className="w-full h-auto" />
               </motion.div>
             ))}
           </div>

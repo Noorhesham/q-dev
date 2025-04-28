@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
 import { useNav } from "@/context/NavContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 interface Member {
   title: string;
@@ -34,7 +34,7 @@ const Slide4 = ({ data }: { data?: BoardMembersData }) => {
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
       <div className="absolute !w-full !h-full inset-0">
         <img
-          src={`${BACKEND_API}/${data?.background}`}
+          src={`${ImageUrl}/${data?.background}`}
           alt="Background Pattern"
           className="object-cover w-full h-full z-10 bg-fixed"
         />
@@ -54,7 +54,7 @@ const Slide4 = ({ data }: { data?: BoardMembersData }) => {
               >
                 <div className="relative aspect-square h-[22rem] rounded-[32px] overflow-hidden">
                   <motion.img
-                    src={`${BACKEND_API}/${member.photo}`}
+                    src={`${ImageUrl}/${member.photo}`}
                     alt={member.title}
                     className="absolute inset-0 w-full h-full object-cover"
                   />

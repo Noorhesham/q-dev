@@ -1,5 +1,5 @@
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 import { useNav } from "@/context/NavContext";
 import { useEffect } from "react";
 
@@ -15,7 +15,7 @@ const Slide3 = ({ data }: { data?: any }) => {
       <div className="absolute h-full left-0 top-0 z-20 w-full bg-main2 mix-blend-multiply"></div>
       <div className="absolute w-full inset-0 ">
         <img
-          src={`${BACKEND_API}/${data.background}`}
+          src={`${ImageUrl}/${data.background}`}
           alt="Background Pattern"
           className="object-cover  w-full  z-10 bg-fixed"
         />
@@ -29,7 +29,7 @@ const Slide3 = ({ data }: { data?: any }) => {
           <div className=" relative">
             <div className="relative w-[350px] h-[410px] rounded-lg  overflow-hidden">
               <img
-                src={`${BACKEND_API}/${data.photo}`}
+                src={`${ImageUrl}/${data.photo}`}
                 alt="CEO"
                 className="object-cover  right-0 absolute top-1/2 -translate-y-1/2  z-20 w-[76%] h-[80%]"
               />{" "}

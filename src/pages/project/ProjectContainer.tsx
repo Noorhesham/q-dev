@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import { HomeButton, PrevButton } from "@/components/PrevNextButtons";
 import Label from "@/components/Label";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 import { useEffect } from "react";
 
 export default function Projects() {
@@ -26,7 +26,7 @@ export default function Projects() {
       {" "}
       <div className="absolute inset-0 mix-blend-multiply ">
         <img
-          src={`${BACKEND_API}/${currentPlace.background}`}
+          src={`${ImageUrl}/${currentPlace.background}`}
           alt="Background Pattern"
           className="object-cover w-full z-10 bg-fixed"
         />
@@ -49,7 +49,7 @@ export default function Projects() {
                 transition={{ delay: index * 0.1 }}
               >
                 <img
-                  src={`${BACKEND_API}/${project.lightImages[0]}`}
+                  src={`${ImageUrl}/${project.lightImages[0]}`}
                   alt={project.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-110"
                 />

@@ -3,7 +3,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { useNav } from "@/context/NavContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 const Counter = ({ value, prefix }: { value: number; prefix?: string }) => {
   const count = useMotionValue(0);
@@ -52,7 +52,7 @@ const Slide1 = ({
       >
         <SvgQ2 />
       </motion.div>
-      <img src={`${BACKEND_API}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
+      <img src={`${ImageUrl}/${data.background}`} className="object-cover w-full absolute inset-0 h-full" alt="" />
 
       <MaxWidthWrapper className="text-white z-30 relative container mx-auto">
         <div className="max-w-3xl py-32">

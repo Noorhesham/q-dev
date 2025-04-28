@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { HomeButton, NextButton, PrevButton } from "@/components/PrevNextButtons";
 import { useProject } from "@/context/ProjectContext";
 import { useEffect } from "react";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 import { useNav } from "@/context/NavContext";
 
 export default function PlaceDetail() {
@@ -28,7 +28,7 @@ export default function PlaceDetail() {
     <div className="relative h-screen overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-main2 mix-blend-multiply z-10"></div>
       <img
-        src={`${BACKEND_API}/${currentPlace.background}`}
+        src={`${ImageUrl}/${currentPlace.background}`}
         className="object-cover w-full absolute inset-0 h-full"
         alt=""
       />
@@ -54,7 +54,7 @@ export default function PlaceDetail() {
                 >
                   <div className="absolute bottom-10 w-full inset-0">
                     <img
-                      src={`${BACKEND_API}/${currentPlace.photo}`}
+                      src={`${ImageUrl}/${currentPlace.photo}`}
                       alt={currentPlace.name}
                       className="w-full h-full object-center object-contain"
                     />

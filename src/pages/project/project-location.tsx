@@ -4,7 +4,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { ShoppingCart, Plane, Building2, GraduationCap } from "lucide-react";
 import Header from "@/components/Header";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 
 const locations = [
   {
@@ -48,7 +48,7 @@ const Location = () => {
         viewport={{ once: true }}
       >
         <img
-          src={`${BACKEND_API}/${currentProject?.location.background}`}
+          src={`${ImageUrl}/${currentProject?.location.background}`}
           alt="Background Pattern"
           className="object-cover w-full h-full bg-fixed"
         />
@@ -83,7 +83,7 @@ const Location = () => {
           <div className="relative">
             <motion.video
               key={selectedLocation?.video} // Force re-render on video change
-              src={`${BACKEND_API}/${selectedLocation?.video}`}
+              src={`${ImageUrl}/${selectedLocation?.video}`}
               autoPlay
               muted
               loop

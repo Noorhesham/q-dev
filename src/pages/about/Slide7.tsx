@@ -5,7 +5,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { useNav } from "@/context/NavContext";
 import { useEffect } from "react";
 import ModelCustom from "@/components/ModelCustom";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 
 interface CertificatesData {
   _id: string;
@@ -56,7 +56,7 @@ const Slide7 = ({ data, setSelectedCompany }: { data?: CertificatesData }) => {
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     className="group relative cursor-pointer aspect-[3/4] bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
                   >
-                    <img src={`${BACKEND_API}/${cert}`} alt={cert} className="object-contain p-4" />
+                    <img src={`${ImageUrl}/${cert}`} alt={cert} className="object-contain p-4" />
                     {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="absolute bottom-4 left-4 right-4 text-white">
                         <h3 className="font-semibold mb-1">{cert.title}</h3>
@@ -65,7 +65,7 @@ const Slide7 = ({ data, setSelectedCompany }: { data?: CertificatesData }) => {
                     </div> */}
                   </motion.div>
                 }
-                content={<img src={`${BACKEND_API}/${cert}`} alt={cert} className="object-contain p-4" />}
+                content={<img src={`${ImageUrl}/${cert}`} alt={cert} className="object-contain p-4" />}
               />
             ))}
           </div>

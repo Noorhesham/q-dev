@@ -3,7 +3,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { useEffect } from "react";
 import { useNav } from "@/context/NavContext";
-import { BACKEND_API } from "@/constants";
+import { BACKEND_API, ImageUrl } from "@/constants";
 import { useAbout } from "@/context/AboutContext";
 import { HomeButton, NextButton, PrevButton } from "@/components/PrevNextButtons";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +94,7 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide, currentS
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            src={`${BACKEND_API}/${selectedCompany.photo}`}
+            src={`${ImageUrl}/${selectedCompany.photo}`}
             className="object-left w-80"
             alt={selectedCompany.title}
           />

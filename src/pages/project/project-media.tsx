@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import ModelCustom from "@/components/ModelCustom";
 import { Switch } from "@/components/ui/switch";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 
 const lightImages = [
   { id: 1, thumbnail: "/Rectangle 3 (1).png" },
@@ -70,7 +70,7 @@ export default function Images() {
                     btn={
                       <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden group cursor-pointer">
                         <img
-                          src={`${BACKEND_API}/${image}` || "/placeholder.svg"}
+                          src={`${ImageUrl}/${image}` || "/placeholder.svg"}
                           className="w-full h-full object-cover transition-transform group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
@@ -79,7 +79,7 @@ export default function Images() {
                     content={
                       <div className="  w-screen h-screen">
                         <img
-                          src={`${BACKEND_API}/${image}` || "/placeholder.svg"}
+                          src={`${ImageUrl}/${image}` || "/placeholder.svg"}
                           className="w-full h-full absolute inset-0 object-cover transition-transform group-hover:scale-105"
                         />
                       </div>

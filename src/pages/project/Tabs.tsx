@@ -3,7 +3,7 @@ import { NavigationControls } from "@/components/NavigationControls";
 import { AnimatePresence } from "framer-motion";
 import { useProject } from "@/context/ProjectContext";
 import { useEffect } from "react";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 import { useNav } from "@/context/NavContext";
 
 export default function ProjectTabs() {
@@ -31,7 +31,7 @@ export default function ProjectTabs() {
         <>
           <div className="mix-blend-multiply bg-main2 absolute left-0 top-0 z-10 w-full h-full"></div>
           <img
-            src={`${BACKEND_API}/${currentProject.lightImages[0]}`}
+            src={`${ImageUrl}/${currentProject.lightImages[0]}`}
             className="object-cover w-full absolute inset-0 h-full"
             alt=""
           />

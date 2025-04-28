@@ -82,7 +82,7 @@ export default function Videos() {
                   <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden group cursor-pointer">
                     <video
                       muted
-                      src={`${BACKEND_API}/${video}` || "/placeholder.svg"}
+                      src={`${ImageUrl}/${video}` || "/placeholder.svg"}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
@@ -97,7 +97,7 @@ export default function Videos() {
                           <div className=" w-full  ">
                             <video
                               controls
-                              src={`${BACKEND_API}/${video}` || "/placeholder.svg"}
+                              src={`${ImageUrl}/${video}` || "/placeholder.svg"}
                               className="w-full h-full inset-0   absolute object-cover"
                             ></video>
                           </div>
