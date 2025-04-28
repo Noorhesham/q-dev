@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import SvgQ2 from "@/components/SvgQ2";
 import { useEffect } from "react";
@@ -19,14 +18,16 @@ interface Company {
 interface Slide6Props {
   selectedCompany: Company | null;
   setSelectedCompany: (company: Company) => void;
+  setCurrentSlide: (slide: number) => void;
+  currentSlide: number;
 }
 
-const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6Props) => {
+const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide, currentSlide }: Slide6Props) => {
   const { data } = useAbout();
-  const { setTitle, companiesLength } = useNav();
+  const { setTitle } = useNav();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Set initial company if none selected
     if (!selectedCompany && data) {
       const companiesData = data.find((d) => d.type === "companies");
       if (companiesData?.companies?.length) {
@@ -36,14 +37,44 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
   }, [data, selectedCompany, setSelectedCompany]);
 
   useEffect(() => {
-    // Set page title from about data
     const companiesData = data?.find((d) => d.type === "companies");
     setTitle(companiesData?.pageTitle || "Our Partners");
   }, [data, setTitle]);
-  const navigate = useNavigate();
 
   if (!selectedCompany) return null;
-  console.log(selectedCompany);
+
+  const handleNext = () => {
+    const companiesData = data?.find((d) => d.type === "companies")?.companies || [];
+    const currentIndex = companiesData.findIndex((c) => c._id === selectedCompany._id);
+    if (companiesData.length > 1) {
+      if (currentIndex === companiesData.length - 1) {
+        // No more companies, proceed to the next slide or home
+        if (data?.length > currentSlide) {
+          setSelectedCompany(null); // Reset selected company
+          setCurrentSlide(currentSlide + 1); // Move to the next slide
+        } else {
+          navigate("/"); // Navigate to home if no more slides
+        }
+      } else {
+        // Proceed to the next company in the list
+        setSelectedCompany(companiesData[currentIndex + 1]);
+      }
+    } else {
+      navigate("/"); // Navigate to home if there is only one company
+    }
+  };
+
+  const handlePrev = () => {
+    const companiesData = data?.find((d) => d.type === "companies")?.companies || [];
+    const currentIndex = companiesData.findIndex((c) => c._id === selectedCompany._id);
+    if (currentIndex > 0) {
+      // Set the previous company
+      setSelectedCompany(companiesData[currentIndex - 1]);
+    } else {
+      selectedCompany && setSelectedCompany(null); // Reset selected company if at the first company
+    }
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <motion.div
@@ -67,7 +98,6 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
             className="object-left w-80"
             alt={selectedCompany.title}
           />
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,35 +113,20 @@ const Slide6 = ({ selectedCompany, setSelectedCompany, setCurrentSlide }: Slide6
             className="text-base"
             dangerouslySetInnerHTML={{ __html: selectedCompany.content }}
           />
-        </div>{" "}
-        <div className=" relative w-full z-50">
-          {/* <img
-          src={`${BACKEND_API}/${selectedCompany.sideImage}`}
-          className="object-left w-80"
-          alt={selectedCompany.title}
-        /> */}{" "}
-          <img src={`/Rectangle 3 (5).png`} className="object-left w-full h-auto rounded-2xl" alt={selectedCompany.title} />
         </div>
-      </MaxWidthWrapper>{" "}
+        <div className="relative w-full z-50">
+          <img
+            src={`/Rectangle 3 (5).png`}
+            className="object-left w-full h-auto rounded-2xl"
+            alt={selectedCompany.title}
+          />
+        </div>
+      </MaxWidthWrapper>
       <MaxWidthWrapper className="relative mt-auto">
         <div className="z-50 relative w-full">
           <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
-            <PrevButton onClick={() => setCurrentSlide(5)} />
-            <NextButton
-              onClick={() => {
-                const companiesData = data?.find((d) => d.type === "companies")?.companies || [];
-                if (companiesData.length > 1) {
-                  const currentIndex = companiesData.findIndex((c) => c._id === selectedCompany._id);
-                  if (currentIndex === companiesData.length - 1) {
-                    navigate("/"); // Navigate to home if it's the last company
-                  } else {
-                    setSelectedCompany(companiesData[currentIndex + 1]); // Move to the next company
-                  }
-                } else {
-                  navigate("/");
-                }
-              }}
-            />
+            <PrevButton onClick={handlePrev} />
+            <NextButton onClick={handleNext} />
           </div>
           <HomeButton onClick={() => navigate("/")} />
         </div>

@@ -54,7 +54,7 @@ const Slide4 = ({ data }: { data?: BoardMembersData }) => {
               >
                 <div className="relative aspect-square h-[22rem] rounded-[32px] overflow-hidden">
                   <motion.img
-                    src={`${BACKEND_API}${member.photo}`}
+                    src={`${BACKEND_API}/${member.photo}`}
                     alt={member.title}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
