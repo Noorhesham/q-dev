@@ -11,7 +11,7 @@ import Header from "@/components/Header";
 import ModelCustom from "@/components/ModelCustom";
 import { Dialog, DialogTrigger, DialogContent, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { useProject } from "@/context/ProjectContext";
-import { BACKEND_API } from "@/constants";
+import { ImageUrl } from "@/constants";
 
 const videos = [
   {
