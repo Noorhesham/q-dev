@@ -14,22 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { HomeButton, NextButton, PrevButton } from "@/components/PrevNextButtons";
 import { useAbout } from "@/context/AboutContext";
 
-interface Company {
-  id: string;
-  title: string;
-  content: string;
-  photo: string;
-}
-
-// Hardcoded companies
-const companies: Company[] = [
-  { id: "1", title: "Company A", content: "Details about Company A", photo: "/images/companyA.jpg" },
-  { id: "2", title: "Company B", content: "Details about Company B", photo: "/images/companyB.jpg" },
-  { id: "3", title: "Company C", content: "Details about Company C", photo: "/images/companyC.jpg" },
-];
-
-// Mapping type to Slide component
-const slideComponents: Record<string, React.ComponentType<any>> = {
+// Slide component mapping
+const slideComponents = {
   special_numbers: Slide1,
   multi_stuff: Slide2,
   ceo: Slide3,
@@ -39,73 +25,104 @@ const slideComponents: Record<string, React.ComponentType<any>> = {
   companies_details: Slide6,
 };
 
+// Reorder data to group duplicates
+const reorderData = (data) => {
+  const typeMap = {};
+  data.forEach((item) => {
+    if (!typeMap[item.type]) {
+      typeMap[item.type] = [];
+    }
+    typeMap[item.type].push(item);
+  });
+
+  const reorderedData = [];
+  const addedTypes = new Set();
+  data.forEach((item) => {
+    if (!addedTypes.has(item.type)) {
+      reorderedData.push(...typeMap[item.type]);
+      addedTypes.add(item.type);
+    }
+  });
+
+  return reorderedData;
+};
+
+// Create sequence including company details
+const createSequence = (reorderedData) => {
+  const companiesIndex = reorderedData.findIndex((item) => item.type === "companies");
+  const companies = companiesIndex !== -1 ? reorderedData[companiesIndex].companies : [];
+
+  const sequence = [
+    ...reorderedData.slice(0, companiesIndex + 1),
+    ...companies.map((company) => ({ type: "companies_details", data: company })),
+    ...reorderedData.slice(companiesIndex + 1),
+  ];
+
+  return sequence;
+};
+
 const AboutUs = () => {
   const { data, isLoading } = useAbout();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
   const navigate = useNavigate();
 
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No data available.</p>;
+
+  // Reorder data and create sequence
+  const reorderedData = reorderData(data);
+  const sequence = createSequence(reorderedData);
+
   const nextSlide = () => {
-    if (currentSlide === data.length - 1) {
+    if (currentSlide === sequence.length - 1) {
       navigate("/");
     } else {
       setCurrentSlide((prev) => prev + 1);
     }
   };
 
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + data.length) % data.length);
-
-  const handleCompanySelect = (company: Company) => {
-    setSelectedCompany(company);
+  const prevSlide = () => {
+    setCurrentSlide((prev) => Math.max(prev - 1, 0));
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No data available.</p>;
-
-  const currentItem = currentSlide === -1 ? null : data[currentSlide];
-  const CurrentSlideComponent = selectedCompany
-    ? slideComponents["companies_details"]
-    : slideComponents[currentItem.type];
+  const currentItem = sequence[currentSlide];
+  const CurrentSlideComponent = slideComponents[currentItem.type];
 
   if (!CurrentSlideComponent) {
-    return <p>Unsupported slide type: {currentItem?.type}</p>;
+    return <p>Unsupported slide type: {currentItem.type}</p>;
   }
-  console.log(currentSlide);
+
   return (
-    <div className={cn("relative overflow-hidden h-screen", currentItem?.type !== "companies" && "bg-main2")}>
+    <div className={cn("relative overflow-hidden h-screen", currentItem.type !== "companies" && "bg-main2")}>
       <div className="mix-blend-multiply absolute left-0 top-0 z-30 w-96">
         <AnimatedSvgQ />
       </div>
 
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentSlide === -1 ? selectedCompany?.id : currentItem?._id}
+          key={currentItem._id || currentItem.data?.id || currentSlide}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
           className="absolute overflow-y-scroll inset-0"
         >
-          <CurrentSlideComponent
-            data={currentItem}
-            companies={companies} // Pass hardcoded companies to Slide5
-            selectedCompany={selectedCompany}
-            setSelectedCompany={handleCompanySelect}
+    <CurrentSlideComponent
+            data={currentItem.type === "companies_details" ? currentItem.data : currentItem}
+            companies={currentItem.type === "companies" ? currentItem.companies : undefined}
             setCurrentSlide={setCurrentSlide}
-            currentSlide={currentSlide}
+            detailsStartIndex={currentItem.type === "companies" ? currentSlide + 1 : undefined}
           />
 
-          {!selectedCompany && (
-            <MaxWidthWrapper className="fixed z-50 left-10 mt-auto">
-              <div className="z-50 relative w-full">
-                <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
-                  <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
-                  <NextButton onClick={nextSlide} />
-                </div>
-                <HomeButton onClick={() => navigate("/")} />
+          <MaxWidthWrapper className="fixed z-50 left-10 mt-auto">
+            <div className="z-50 relative w-full">
+              <div className="special-font absolute bottom-14 left-0 flex items-center gap-4 z-50">
+                <PrevButton disabled={currentSlide === 0} onClick={prevSlide} />
+                <NextButton onClick={nextSlide} />
               </div>
-            </MaxWidthWrapper>
-          )}
+              <HomeButton onClick={() => navigate("/")} />
+            </div>
+          </MaxWidthWrapper>
         </motion.div>
       </AnimatePresence>
     </div>
